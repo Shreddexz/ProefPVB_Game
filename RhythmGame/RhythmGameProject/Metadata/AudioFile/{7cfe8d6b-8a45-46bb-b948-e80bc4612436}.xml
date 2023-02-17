@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{7cfe8d6b-8a45-46bb-b948-e80bc4612436}">
+		<property name="assetPath">
+			<value>Songs/v3 Ghostly Hallucinations (SC).wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>198.75</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{7df5850f-a901-4d8b-8596-f20358b5936c}</destination>
+		</relationship>
+	</object>
+</objects>
