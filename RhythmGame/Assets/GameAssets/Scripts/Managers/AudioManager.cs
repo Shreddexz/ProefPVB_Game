@@ -40,6 +40,7 @@ public class AudioManager : MonoBehaviour
     ulong parentDSP;
     ulong cachedSamples;
     public string playbackTime;
+    public double pbt;
     static string songDuration;
     Bus sfxBus;
     Bus musicBus;
@@ -86,6 +87,8 @@ public class AudioManager : MonoBehaviour
     public float noteOffset;
     public double marginOfErrorSeconds;
 
+    public Lane[] lanes;
+
     /// <summary>
     /// A simple input method for referring to an FMOD event.
     /// </summary>
@@ -117,11 +120,17 @@ public class AudioManager : MonoBehaviour
     {
         musicBus = RuntimeManager.GetBus("bus:/Music");
         sfxBus = RuntimeManager.GetBus("bus:/SFX");
+        musicVolume = 0.5f;
+        sfxVolume = 0.5f;
 
-        musicBus.getVolume(out c_musicVolume);
-        sfxBus.getVolume(out c_sfxVolume);
-        musicVolume = c_musicVolume;
-        sfxVolume = c_sfxVolume;
+        c_musicVolume = 0.5f;
+        c_sfxVolume = 0.5f;
+
+        musicBus.setVolume(0.5f);
+        sfxBus.setVolume(0.5f);
+        // musicBus.getVolume(out c_musicVolume);
+        // sfxBus.getVolume(out c_sfxVolume);
+
         RuntimeManager.CoreSystem.getMasterChannelGroup(out masterChannelGroup);
         RuntimeManager.CoreSystem.getSoftwareFormat(out masterSampleRate, out SPEAKERMODE mode, out int speakerNum);
     }
@@ -129,7 +138,7 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         instance = this;
-        ReadFromFile();
+        // ReadFromFile();
         GetSongInfo();
     }
 
@@ -177,7 +186,8 @@ public class AudioManager : MonoBehaviour
             UpdateDSPTime();
 
         TimeSpan playTimeTS = TimeSpan.FromSeconds(currentTime);
-        playbackTime = playTimeTS.ToString("mm':'ss");
+        // playbackTime = playTimeTS.ToString("mm':'ss");
+        pbt = currentTime;
     }
 
 #region Midi
@@ -201,6 +211,11 @@ public class AudioManager : MonoBehaviour
         var notes = songChart.GetNotes();
         var notesArray = new Note[notes.Count];
         notes.CopyTo(notesArray, 0);
+
+        foreach (var lane in lanes)
+        {
+            lane.SetTimestamp(notesArray);
+        }
     }
 #endregion
 
@@ -224,6 +239,7 @@ public class AudioManager : MonoBehaviour
         musicPlayer.setPaused(false);
         cachedSamples = dspClock;
         GetSongInfo();
+        Invoke("ReadFromFile",0.01f);
     }
 
     void OnMusicStart()
@@ -329,7 +345,7 @@ public class AudioManager : MonoBehaviour
         {
             fontSize = 24
         };
-        GUILayout.Box($"Current beat: {beat} \nSong BPM: {bpm}\nPlaytime: {playbackTime}/{songDuration}", boxStyle,
+        GUILayout.Box($"Current beat: {beat} \nSong BPM: {bpm}\nPlaytime: {pbt}/{songDuration}", boxStyle,
                       GUILayout.Width(400f), GUILayout.Height(200f));
     }
 #endif
