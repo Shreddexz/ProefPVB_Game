@@ -38,7 +38,7 @@ public class Lane : MonoBehaviour
     {
         if (spawnIndex < timeStamps.Count)
         {
-            if (AudioManager.instance.pbt >=
+            if (AudioManager.instance.playbackTime >=
                 timeStamps[spawnIndex] - AudioManager.instance.noteTime)
             {
                 GameObject note = Instantiate(noteObject, transform);
@@ -52,7 +52,7 @@ public class Lane : MonoBehaviour
         {
             double timeStamp = timeStamps[inputIndex];
             double errorMargin = AudioManager.instance.marginOfErrorSeconds;
-            double audioTime = AudioManager.instance.pbt -
+            double audioTime = AudioManager.instance.playbackTime -
                                (AudioManager.instance.inputDelayMilliseconds / 1000f);
 
             if (Input.GetKeyDown(KeyCode.Alpha1))

@@ -6,28 +6,31 @@ using UnityEngine;
 public class NoteEnemy : MonoBehaviour
 {
     public double timeInstantiated;
-    double timeSinceSpawn;
-    public float arriveTime;
+    // double timeSinceSpawn;
+    public double arriveTime;
     public float moveSpeed;
+    [NonSerialized]
+    public bool canMove;
+
+    void Awake()
+    {
+        canMove = true;
+    }
 
     void Start()
     {
-        timeInstantiated = AudioManager.instance.pbt;
-        moveSpeed = AudioManager.bpm / 60f;
+        timeInstantiated = AudioManager.instance.playbackTime;
+        moveSpeed = 60 * 4 / AudioManager.bpm;
     }
 
     void Update()
     {
-        // timeSinceSpawn = AudioManager.instance.pbt - timeInstantiated;
-        // float time = (float) (timeSinceSpawn / (AudioManager.instance.noteTime * 2f));
-        //
-        // if (time > 1)
-        //     Destroy(gameObject);
-        // else
-        // {
-        //     transform.position = Vector3.Lerp(Vector3.forward * AudioManager.instance.noteOffset,
-        //                                       Vector3.forward * -AudioManager.instance.noteOffset, time);
-        // }
-        transform.position += Vector3.forward * moveSpeed * Time.deltaTime;
+        MoveNote();
+    }
+
+    void MoveNote()
+    {
+        if (canMove)
+            transform.position -= Vector3.forward * moveSpeed * Time.deltaTime;
     }
 }

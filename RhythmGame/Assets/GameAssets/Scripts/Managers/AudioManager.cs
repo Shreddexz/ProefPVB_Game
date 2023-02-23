@@ -30,7 +30,7 @@ public class AudioManager : MonoBehaviour
 
 #region FMODVars
     EVENT_CALLBACK beatCallback;
-    PLAYBACK_STATE playbackState;
+    public static PLAYBACK_STATE playbackState;
     public static EventInstance musicPlayer;
     public static ChannelGroup masterChannelGroup;
     int masterSampleRate;
@@ -39,8 +39,8 @@ public class AudioManager : MonoBehaviour
     ulong dspClock;
     ulong parentDSP;
     ulong cachedSamples;
-    public string playbackTime;
-    public double pbt;
+    public string playTimeString;
+    public double playbackTime;
     static string songDuration;
     Bus sfxBus;
     Bus musicBus;
@@ -137,9 +137,14 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        instance = this;
-        // ReadFromFile();
-        GetSongInfo();
+        if (!instance)
+            instance = this;
+        else
+        {
+            Debug.Log("Audiomanager instance already exists. The new instance will be destroyed");
+            Destroy(this);
+        }
+        
     }
 
     void OnDestroy()
@@ -186,38 +191,38 @@ public class AudioManager : MonoBehaviour
             UpdateDSPTime();
 
         TimeSpan playTimeTS = TimeSpan.FromSeconds(currentTime);
-        // playbackTime = playTimeTS.ToString("mm':'ss");
-        pbt = currentTime;
+        playTimeString = playTimeTS.ToString("mm':'ss");
+        playbackTime = currentTime;
     }
 
-#region Midi
-    /// <summary>
-    /// Locates and assigns the MIDI(.mid) file
-    /// so that the notes can be read and used.
-    /// </summary>
-    void ReadFromFile()
-    {
-        chartDir = $"{Application.dataPath}/StreamingAssets/{chartName}.mid";
-        songChart = MidiFile.Read(chartDir);
-        GetMidiData();
-    }
-
-    /// <summary>
-    /// Reads the data from the assigned MIDI file,
-    /// placing all the notes in an array.
-    /// </summary>
-    void GetMidiData()
-    {
-        var notes = songChart.GetNotes();
-        var notesArray = new Note[notes.Count];
-        notes.CopyTo(notesArray, 0);
-
-        foreach (var lane in lanes)
-        {
-            lane.SetTimestamp(notesArray);
-        }
-    }
-#endregion
+// #region Midi
+//     /// <summary>
+//     /// Locates and assigns the MIDI(.mid) file
+//     /// so that the notes can be read and used.
+//     /// </summary>
+//     void ReadFromFile()
+//     {
+//         chartDir = $"{Application.dataPath}/StreamingAssets/{chartName}.mid";
+//         songChart = MidiFile.Read(chartDir);
+//         GetMidiData();
+//     }
+//
+//     /// <summary>
+//     /// Reads the data from the assigned MIDI file,
+//     /// placing all the notes in an array.
+//     /// </summary>
+//     void GetMidiData()
+//     {
+//         var notes = songChart.GetNotes();
+//         var notesArray = new Note[notes.Count];
+//         notes.CopyTo(notesArray, 0);
+//
+//         foreach (var lane in lanes)
+//         {
+//             lane.SetTimestamp(notesArray);
+//         }
+//     }
+// #endregion
 
 
 #region Music
@@ -239,7 +244,8 @@ public class AudioManager : MonoBehaviour
         musicPlayer.setPaused(false);
         cachedSamples = dspClock;
         GetSongInfo();
-        Invoke("ReadFromFile",0.01f);
+        // Invoke("ReadFromFile",
+        //        0.2f); //temporary delay for the reading of the file to make sure the timeline values have been retrieved
     }
 
     void OnMusicStart()
@@ -345,7 +351,7 @@ public class AudioManager : MonoBehaviour
         {
             fontSize = 24
         };
-        GUILayout.Box($"Current beat: {beat} \nSong BPM: {bpm}\nPlaytime: {pbt}/{songDuration}", boxStyle,
+        GUILayout.Box($"Current beat: {beat} \nSong BPM: {bpm}\nPlaytime: {playTimeString}/{songDuration}", boxStyle,
                       GUILayout.Width(400f), GUILayout.Height(200f));
     }
 #endif
