@@ -19,7 +19,7 @@ public class AudioManager : MonoBehaviour
 #region Variables
     public static bool paused;
     public static AudioManager instance;
-
+    public static bool infoSet;
 
 #region MIDIVars
     public static MidiFile songChart;
@@ -51,10 +51,14 @@ public class AudioManager : MonoBehaviour
 
     public delegate void MusicStateChange();
 
+    public delegate void TimelineInfoSet();
+
     public static VolumeChangedDelegate SfxVolumeChangedDelegate;
     public static VolumeChangedDelegate MusicVolumeChangedDelegate;
 
     public static MusicStateChange onMusicStart;
+
+    public static TimelineInfoSet onInfoReceived;
 #endregion
 
 #region VolumeMixerVars
@@ -71,6 +75,8 @@ public class AudioManager : MonoBehaviour
     {
         public int currentBeat = 0;
     }
+
+    static SongInfo songInfo;
 
     public SongInfo info;
     GCHandle timelineHandle;
@@ -105,6 +111,8 @@ public class AudioManager : MonoBehaviour
         MusicVolumeChangedDelegate += MusicVolumeChanged;
         SfxVolumeChangedDelegate += SFXVolumeChanged;
         onMusicStart += OnMusicStart;
+
+        onInfoReceived += OnInfoReceived;
     }
 
     void OnDisable()
@@ -112,6 +120,7 @@ public class AudioManager : MonoBehaviour
         MusicVolumeChangedDelegate -= MusicVolumeChanged;
         SfxVolumeChangedDelegate -= SFXVolumeChanged;
         onMusicStart -= OnMusicStart;
+        onInfoReceived -= OnInfoReceived;
         musicPlayer.stop(STOP_MODE.ALLOWFADEOUT);
         musicPlayer.release();
     }
@@ -144,7 +153,8 @@ public class AudioManager : MonoBehaviour
             Debug.Log("Audiomanager instance already exists. The new instance will be destroyed");
             Destroy(this);
         }
-        
+
+        // songInfo = new SongInfo();
     }
 
     void OnDestroy()
@@ -236,16 +246,15 @@ public class AudioManager : MonoBehaviour
         {
             musicPlayer.release();
             musicPlayer.stop(STOP_MODE.ALLOWFADEOUT);
+            RuntimeManager.DetachInstanceFromGameObject(musicPlayer);
         }
 
         musicPlayer = RuntimeManager.CreateInstance(FMODEvent("PlayGH"));
         RuntimeManager.AttachInstanceToGameObject(musicPlayer, audioObject.transform);
+        if (!infoSet)
+            GetSongInfo();
         musicPlayer.start();
         musicPlayer.setPaused(false);
-        cachedSamples = dspClock;
-        GetSongInfo();
-        // Invoke("ReadFromFile",
-        //        0.2f); //temporary delay for the reading of the file to make sure the timeline values have been retrieved
     }
 
     void OnMusicStart()
@@ -254,6 +263,11 @@ public class AudioManager : MonoBehaviour
         playbackState = PLAYBACK_STATE.PLAYING;
         cachedSamples = dspClock;
         StartSongPlayback();
+    }
+
+    void OnInfoReceived()
+    {
+        infoSet = true;
     }
 #endregion
 
@@ -285,7 +299,8 @@ public class AudioManager : MonoBehaviour
         timelineHandle = new GCHandle();
         timelineHandle = GCHandle.Alloc(info, GCHandleType.Pinned);
         musicPlayer.setUserData(GCHandle.ToIntPtr(timelineHandle));
-        musicPlayer.setCallback(beatCallback, EVENT_CALLBACK_TYPE.TIMELINE_BEAT | EVENT_CALLBACK_TYPE.SOUND_PLAYED);
+        musicPlayer.setCallback(beatCallback,
+                                EVENT_CALLBACK_TYPE.TIMELINE_BEAT | EVENT_CALLBACK_TYPE.SOUND_PLAYED);
     }
 
     /// <summary>
@@ -318,13 +333,17 @@ public class AudioManager : MonoBehaviour
             switch (type)
             {
                 case EVENT_CALLBACK_TYPE.TIMELINE_BEAT:
-                    GCHandle timelineHande = GCHandle.FromIntPtr(infoPtr);
-                    SongInfo songInfo = (SongInfo) timelineHande.Target;
+                    if (songInfo == null)
+                        songInfo = new SongInfo();
+                    GCHandle timelineHandle = GCHandle.FromIntPtr(infoPtr);
+                    songInfo = (SongInfo) timelineHandle.Target;
                     var songVars =
                         (TIMELINE_BEAT_PROPERTIES) Marshal.PtrToStructure(parameterPtr,
                                                                           typeof(TIMELINE_BEAT_PROPERTIES));
                     beat = songVars.beat;
                     bpm = songVars.tempo;
+                    if(!infoSet)
+                        onInfoReceived?.Invoke();
                     break;
 
                 case EVENT_CALLBACK_TYPE.SOUND_PLAYED:

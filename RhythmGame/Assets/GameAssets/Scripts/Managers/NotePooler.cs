@@ -4,24 +4,28 @@ using System.Collections.Generic;
 using FMOD.Studio;
 using UnityEngine;
 using Melanchall.DryWetMidi.Interaction;
+using Debug = UnityEngine.Debug;
 
 public class NotePooler : MonoBehaviour
 {
     public int notePoolLimit = 15;
-    GameObject noteEnemy;
+    public GameObject noteEnemy;
     double songTime;
     double twoBarsDuration;
     float spawnOffset;
     float bpm;
     public static Note[] notesArray;
     public List<NoteEnemy> pooledNotes = new();
+    static List<double> timeStamps;
     bool bpmSet;
+    int noteIndex;
 
     public Transform spawnPos;
 
     void Awake()
     {
         bpmSet = false;
+        timeStamps = new();
     }
 
     void GetSongBPM()
@@ -30,8 +34,8 @@ public class NotePooler : MonoBehaviour
         {
             Debug.Log(AudioManager.bpm);
             bpm = AudioManager.bpm;
-            spawnOffset = 60 * 8 / bpm;
             twoBarsDuration = 60 * 8 / bpm;
+            spawnOffset = 60 * 16 / bpm;
             spawnPos.position = new Vector3(0f, 0f, spawnOffset);
             bpmSet = true;
         }
@@ -49,34 +53,31 @@ public class NotePooler : MonoBehaviour
     public static void CopyNoteList(Note[] arrayToCopy)
     {
         notesArray = arrayToCopy;
-        // foreach (var note in notesArray)
-        // {
-        //     MetricTimeSpan mts =
-        //         TimeConverter.ConvertTo<MetricTimeSpan>(note.Time, NoteManager.songChart.GetTempoMap());
-        //     double noteTime = ((double) mts.Minutes * 60) + ((double) mts.Seconds) +
-        //                       ((double) mts.Milliseconds / 1000);
-        // }
+        AddNotesTimes();
     }
+
+    static void AddNotesTimes()
+    {
+        foreach (var note in notesArray)
+        {
+            MetricTimeSpan mts = note.TimeAs<MetricTimeSpan>(NoteManager.songChart.GetTempoMap());
+            double noteTime = Convert.ToDouble(mts.Minutes * 60) + Convert.ToDouble(mts.Seconds) +
+                              Convert.ToDouble(mts.Milliseconds / 1000);
+            timeStamps.Add(noteTime);
+            Debug.Log(noteTime);
+        }
+    }
+
 
     void CheckNoteConditions()
     {
-        // if (AudioManager.playbackState == PLAYBACK_STATE.PLAYING)
-        //     foreach (var note in notesArray)
-        //     {
-        //         MetricTimeSpan mts =
-        //             TimeConverter.ConvertTo<MetricTimeSpan>(note.Time, NoteManager.songChart.GetTempoMap());
-        //         double noteTime = ((double) mts.Minutes * 60) + ((double) mts.Seconds) +
-        //                           ((double) mts.Milliseconds / 1000);
-        //     }
-
-        for (int i = 0; i < notesArray.Length - 1; i++)
-        {
-            if (songTime >= notesArray[i].Time - twoBarsDuration)
-            {
-                Debug.Log("test");
-                SpawnNote();
-            }
-        }
+        if (AudioManager.playbackState == PLAYBACK_STATE.PLAYING)
+            if (noteIndex < timeStamps.Count)
+                if (songTime >= timeStamps[noteIndex] - twoBarsDuration)
+                {
+                    SpawnNote();
+                    noteIndex++;
+                }
     }
 
     public void SpawnNote()
@@ -92,7 +93,7 @@ public class NotePooler : MonoBehaviour
             return;
         }
 
-        GameObject noteObj = Instantiate(noteEnemy, spawnPos);
+        Instantiate(noteEnemy, spawnPos);
     }
 
     public void PoolObject(NoteEnemy noteObj)

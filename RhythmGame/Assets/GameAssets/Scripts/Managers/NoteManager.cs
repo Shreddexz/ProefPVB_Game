@@ -14,9 +14,19 @@ public class NoteManager : MonoBehaviour
     public static Note[] notesArray;
     int index = 0;
 
+    void OnEnable()
+    {
+        AudioManager.onInfoReceived += OnInfoReceived;
+    }
+
+    void OnDisable()
+    {
+        AudioManager.onInfoReceived -= OnInfoReceived;
+    }
+
     void Start()
     {
-        ReadFromFile();
+       ReadFromFile();
     }
 
     /// <summary>
@@ -27,7 +37,6 @@ public class NoteManager : MonoBehaviour
     {
         string fileDir = $"{Application.dataPath}/StreamingAssets/{chartNames[index]}.mid";
         songChart = MidiFile.Read(fileDir);
-        GetMidiData();
     }
 
     /// <summary>
@@ -36,12 +45,17 @@ public class NoteManager : MonoBehaviour
     /// </summary>
     void GetMidiData()
     {
+        songChart.ReplaceTempoMap(TempoMap.Create(Tempo.FromBeatsPerMinute(AudioManager.bpm)));
         var notes = songChart.GetNotes();
         notesArray = new Note[notes.Count];
         notes.CopyTo(notesArray, 0);
         NotePooler.CopyNoteList(notesArray);
     }
 
+    void OnInfoReceived()
+    {
+        GetMidiData();
+    }
     void Update()
     {
     }

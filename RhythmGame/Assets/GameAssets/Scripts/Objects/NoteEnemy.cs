@@ -20,7 +20,8 @@ public class NoteEnemy : MonoBehaviour
     void Start()
     {
         timeInstantiated = AudioManager.instance.playbackTime;
-        moveSpeed = 60 * 4 / AudioManager.bpm;
+        // moveSpeed = 60 * 4 / AudioManager.bpm;
+        moveSpeed = AudioManager.bpm / 60;
     }
 
     void Update()
