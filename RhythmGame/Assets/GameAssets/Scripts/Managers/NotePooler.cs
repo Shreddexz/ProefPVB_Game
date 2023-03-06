@@ -36,7 +36,7 @@ public class NotePooler : MonoBehaviour
     void OnInfoReceived()
     {
         AudioManager.masterSystem.getDSPBufferSize(out uint bufferlength, out int numbuffers);
-        audioLatencyMS = (double)numbuffers * bufferlength / AudioManager.instance.masterSampleRate;
+        audioLatencyMS = (double) numbuffers * bufferlength / AudioManager.instance.masterSampleRate;
         Debug.Log($"Audio latency = {audioLatencyMS * 1000}ms");
     }
 
@@ -78,9 +78,10 @@ public class NotePooler : MonoBehaviour
     {
         foreach (var note in notesArray)
         {
-            double noteTime = note.TimeAs<MetricTimeSpan>(NoteManager.songChart.GetTempoMap()).TotalSeconds -  audioLatencyMS;
+            double noteTime = note.TimeAs<MetricTimeSpan>(NoteManager.songChart.GetTempoMap()).TotalSeconds +
+                              audioLatencyMS;
             timeStamps.Add(noteTime);
-            Debug.Log(noteTime);
+            // Debug.Log(noteTime);
         }
     }
 
