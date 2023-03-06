@@ -13,6 +13,7 @@ using Melanchall.DryWetMidi.Multimedia;
 using UnityEngine.Networking;
 using STOP_MODE = FMOD.Studio.STOP_MODE;
 using Debug = UnityEngine.Debug;
+using INITFLAGS = FMOD.INITFLAGS;
 
 public class AudioManager : MonoBehaviour
 {
@@ -29,11 +30,12 @@ public class AudioManager : MonoBehaviour
 
 
 #region FMODVars
+    public static FMOD.System masterSystem;
     EVENT_CALLBACK beatCallback;
     public static PLAYBACK_STATE playbackState;
     public static EventInstance musicPlayer;
     public static ChannelGroup masterChannelGroup;
-    int masterSampleRate;
+    public int masterSampleRate;
     double currentSamples;
     double currentTime;
     ulong dspClock;
@@ -69,7 +71,7 @@ public class AudioManager : MonoBehaviour
     float c_musicVolume;
 #endregion
 
-    [StructLayout(layoutKind: LayoutKind.Sequential)] //this places the variables sequentially
+    [StructLayout(LayoutKind.Sequential)] //this places the variables sequentially
     //in the memory to access it quicker and more easily.
     public class SongInfo
     {
@@ -81,7 +83,7 @@ public class AudioManager : MonoBehaviour
     public SongInfo info;
     GCHandle timelineHandle;
 
-    public static int beat = 0;
+    public static int beat;
     public static float bpm;
     public static uint songLength;
 
@@ -94,6 +96,8 @@ public class AudioManager : MonoBehaviour
     public double marginOfErrorSeconds;
 
     public Lane[] lanes;
+    public string[] songs;
+    public int songIndex;
 
     /// <summary>
     /// A simple input method for referring to an FMOD event.
@@ -123,10 +127,13 @@ public class AudioManager : MonoBehaviour
         onInfoReceived -= OnInfoReceived;
         musicPlayer.stop(STOP_MODE.ALLOWFADEOUT);
         musicPlayer.release();
+        masterSystem.release();
     }
 
     void Awake()
     {
+        Factory.System_Create(out masterSystem);
+        masterSystem.init(500, INITFLAGS.NORMAL, IntPtr.Zero);
         musicBus = RuntimeManager.GetBus("bus:/Music");
         sfxBus = RuntimeManager.GetBus("bus:/SFX");
         musicVolume = 0.5f;
@@ -205,36 +212,6 @@ public class AudioManager : MonoBehaviour
         playbackTime = currentTime;
     }
 
-// #region Midi
-//     /// <summary>
-//     /// Locates and assigns the MIDI(.mid) file
-//     /// so that the notes can be read and used.
-//     /// </summary>
-//     void ReadFromFile()
-//     {
-//         chartDir = $"{Application.dataPath}/StreamingAssets/{chartName}.mid";
-//         songChart = MidiFile.Read(chartDir);
-//         GetMidiData();
-//     }
-//
-//     /// <summary>
-//     /// Reads the data from the assigned MIDI file,
-//     /// placing all the notes in an array.
-//     /// </summary>
-//     void GetMidiData()
-//     {
-//         var notes = songChart.GetNotes();
-//         var notesArray = new Note[notes.Count];
-//         notes.CopyTo(notesArray, 0);
-//
-//         foreach (var lane in lanes)
-//         {
-//             lane.SetTimestamp(notesArray);
-//         }
-//     }
-// #endregion
-
-
 #region Music
     /// <summary>
     /// Creates an instance of the music event, and starts it.
@@ -248,8 +225,8 @@ public class AudioManager : MonoBehaviour
             musicPlayer.stop(STOP_MODE.ALLOWFADEOUT);
             RuntimeManager.DetachInstanceFromGameObject(musicPlayer);
         }
-
-        musicPlayer = RuntimeManager.CreateInstance(FMODEvent("PlayGH"));
+        
+        musicPlayer = RuntimeManager.CreateInstance(FMODEvent(songs[songIndex]));
         RuntimeManager.AttachInstanceToGameObject(musicPlayer, audioObject.transform);
         if (!infoSet)
             GetSongInfo();
@@ -342,8 +319,12 @@ public class AudioManager : MonoBehaviour
                                                                           typeof(TIMELINE_BEAT_PROPERTIES));
                     beat = songVars.beat;
                     bpm = songVars.tempo;
-                    if(!infoSet)
+                    if (!infoSet)
+                    {
+                        // masterSystem.setDSPBufferSize(512, 4);
                         onInfoReceived?.Invoke();
+                    }
+
                     break;
 
                 case EVENT_CALLBACK_TYPE.SOUND_PLAYED:

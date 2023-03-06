@@ -17,10 +17,28 @@ public class NotePooler : MonoBehaviour
     public static Note[] notesArray;
     public List<NoteEnemy> pooledNotes = new();
     static List<double> timeStamps;
+    static double audioLatencyMS;
     bool bpmSet;
     int noteIndex;
 
     public Transform spawnPos;
+
+    void OnEnable()
+    {
+        AudioManager.onMusicStart += OnInfoReceived;
+    }
+
+    void OnDisable()
+    {
+        AudioManager.onMusicStart -= OnInfoReceived;
+    }
+
+    void OnInfoReceived()
+    {
+        AudioManager.masterSystem.getDSPBufferSize(out uint bufferlength, out int numbuffers);
+        audioLatencyMS = (double)numbuffers * bufferlength / AudioManager.instance.masterSampleRate;
+        Debug.Log($"Audio latency = {audioLatencyMS * 1000}ms");
+    }
 
     void Awake()
     {
@@ -60,9 +78,7 @@ public class NotePooler : MonoBehaviour
     {
         foreach (var note in notesArray)
         {
-            MetricTimeSpan mts = note.TimeAs<MetricTimeSpan>(NoteManager.songChart.GetTempoMap());
-            double noteTime = Convert.ToDouble(mts.Minutes * 60) + Convert.ToDouble(mts.Seconds) +
-                              Convert.ToDouble(mts.Milliseconds / 1000);
+            double noteTime = note.TimeAs<MetricTimeSpan>(NoteManager.songChart.GetTempoMap()).TotalSeconds -  audioLatencyMS;
             timeStamps.Add(noteTime);
             Debug.Log(noteTime);
         }

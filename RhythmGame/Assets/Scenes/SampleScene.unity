@@ -298,6 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chartName: GHChart
+  masterSampleRate: 0
   playTimeString: 
   playbackTime: 0
   sfxVolume: 0
@@ -310,6 +311,9 @@ MonoBehaviour:
   marginOfErrorSeconds: 0.3
   lanes:
   - {fileID: 294947742}
+  songs:
+  - PlayGH
+  songIndex: 0
 --- !u!4 &676596453
 Transform:
   m_ObjectHideFlags: 0
