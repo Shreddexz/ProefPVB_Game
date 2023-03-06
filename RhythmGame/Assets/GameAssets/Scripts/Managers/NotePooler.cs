@@ -20,6 +20,10 @@ public class NotePooler : MonoBehaviour
     static double audioLatencyMS;
     bool bpmSet;
     int noteIndex;
+    static string noteConcat;
+    public static Lane[] lanes;
+    public Lane[] lanesCopy;
+    static int laneIndex;
 
     public Transform spawnPos;
 
@@ -42,8 +46,10 @@ public class NotePooler : MonoBehaviour
 
     void Awake()
     {
+        lanes = new Lane[lanesCopy.Length];
         bpmSet = false;
         timeStamps = new();
+        lanesCopy.CopyTo(lanes, 0);
     }
 
     void GetSongBPM()
@@ -54,8 +60,12 @@ public class NotePooler : MonoBehaviour
             bpm = AudioManager.bpm;
             twoBarsDuration = 60 * 8 / bpm;
             spawnOffset = 60 * 16 / bpm;
-            spawnPos.position = new Vector3(0f, 0f, spawnOffset);
+            // spawnPos.position = new Vector3(0f, 0f, spawnOffset);
             bpmSet = true;
+            foreach (var lane in lanes)
+            {
+                lane.transform.position = new Vector3(lane.transform.position.x, 0, spawnOffset);
+            }
         }
     }
 
@@ -80,8 +90,30 @@ public class NotePooler : MonoBehaviour
         {
             double noteTime = note.TimeAs<MetricTimeSpan>(NoteManager.songChart.GetTempoMap()).TotalSeconds +
                               audioLatencyMS;
-            timeStamps.Add(noteTime);
-            // Debug.Log(noteTime);
+
+            noteConcat = String.Concat(note.NoteName, note.Octave);
+            Debug.Log($"{noteConcat}, {noteTime}");
+            switch (noteConcat)
+            {
+                case "C4":
+                    laneIndex = 0;
+                    break;
+
+                case "D4":
+                    laneIndex = 1;
+                    break;
+
+                case "E4":
+                    laneIndex = 2;
+                    break;
+
+                default:
+                    laneIndex = 0;
+                    break;
+            }
+
+            lanes[laneIndex].timeStamps.Add(noteTime);
+            // timeStamps.Add(noteTime);
         }
     }
 
@@ -89,28 +121,31 @@ public class NotePooler : MonoBehaviour
     void CheckNoteConditions()
     {
         if (AudioManager.playbackState == PLAYBACK_STATE.PLAYING)
-            if (noteIndex < timeStamps.Count)
-                if (songTime >= timeStamps[noteIndex] - twoBarsDuration)
-                {
-                    SpawnNote();
-                    noteIndex++;
-                }
+            for (int i = 0; i < lanes.Length; i++)
+            {
+                if (lanes[i].noteIndex < lanes[i].timeStamps.Count)
+                    if (songTime >= lanes[i].timeStamps[noteIndex] - twoBarsDuration)
+                    {
+                        SpawnNote(lanes[i]);
+                        lanes[i].noteIndex++;
+                    }
+            }
     }
 
-    public void SpawnNote()
+    public void SpawnNote(Lane lane)
     {
         if (pooledNotes.Count > 0)
         {
             NoteEnemy note = pooledNotes[0];
-            if (note.transform.position != spawnPos.transform.position)
-                note.transform.position = spawnPos.transform.position;
+            if (note.transform.position != lane.gameObject.transform.position)
+                note.transform.position = lane.gameObject.transform.position;
             note.canMove = true;
             note.gameObject.SetActive(true);
             pooledNotes.Remove(note);
             return;
         }
 
-        Instantiate(noteEnemy, spawnPos);
+        Instantiate(noteEnemy, lane.gameObject.transform);
     }
 
     public void PoolObject(NoteEnemy noteObj)
@@ -124,6 +159,6 @@ public class NotePooler : MonoBehaviour
         noteObj.canMove = false;
         pooledNotes.Add(noteObj);
         noteObj.gameObject.SetActive(false);
-        noteObj.transform.position = spawnPos.transform.position;
+        // noteObj.transform.position = spawnPos.transform.position;
     }
 }

@@ -9,74 +9,56 @@ using Note = Melanchall.DryWetMidi.Interaction.Note;
 
 public class Lane : MonoBehaviour
 {
-    public NoteName LaneNote;
+    public NoteName laneNote;
 
     public GameObject noteObject;
-    List<NoteEnemy> notes = new();
+    public List<NoteEnemy> notes = new();
     public List<double> timeStamps = new();
-    int spawnIndex;
+    [NonSerialized]
+    public int noteIndex;
     int inputIndex;
 
-    void Start()
+    NotePooler pooler;
+
+    void Awake()
     {
+        pooler = transform.root.GetComponent<NotePooler>();
     }
 
-    public void SetTimestamp(Note[] noteArray)
-    {
-        foreach (var note in noteArray)
-        {
-            if (note.NoteName == LaneNote)
-            {
-                MetricTimeSpan mts =
-                    TimeConverter.ConvertTo<MetricTimeSpan>(note.Time, AudioManager.songChart.GetTempoMap());
-                timeStamps.Add((double) mts.Minutes * 60f + mts.Seconds + (double) mts.Milliseconds / 1000f);
-            }
-        }
-    }
-
-    void Update()
-    {
-        if (spawnIndex < timeStamps.Count)
-        {
-            if (AudioManager.instance.playbackTime >=
-                timeStamps[spawnIndex] - AudioManager.instance.noteTime)
-            {
-                GameObject note = Instantiate(noteObject, transform);
-                notes.Add(note.GetComponent<NoteEnemy>());
-                note.GetComponent<NoteEnemy>().arriveTime = (float) timeStamps[spawnIndex];
-                spawnIndex++;
-            }
-        }
-
-        if (inputIndex < timeStamps.Count)
-        {
-            double timeStamp = timeStamps[inputIndex];
-            double errorMargin = AudioManager.instance.marginOfErrorSeconds;
-            double audioTime = AudioManager.instance.playbackTime -
-                               (AudioManager.instance.inputDelayMilliseconds / 1000f);
-
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                if (Math.Abs(audioTime - timeStamp) < errorMargin)
-                    Hit();
-            }
-
-            if (timeStamp + errorMargin <= audioTime)
-            {
-                Miss();
-            }
-        }
-        
-    }
-
-    void Hit()
-    {
-        Debug.Log("Note hit");
-    }
-
-    void Miss()
-    {
-        Debug.Log("Note Missed");
-        inputIndex++;
-    }
+    ///SPAWN CODE IN HERE REFFERING TO POOLER
+    
+    // void Update()
+    // {
+    //
+    //     if (inputIndex < timeStamps.Count)
+    //     {
+    //         double timeStamp = timeStamps[inputIndex];
+    //         double errorMargin = AudioManager.instance.marginOfErrorSeconds;
+    //         double audioTime = AudioManager.instance.playbackTime -
+    //                            (AudioManager.instance.inputDelayMilliseconds / 1000f);
+    //
+    //         if (Input.GetKeyDown(KeyCode.Alpha1))
+    //         {
+    //             if (Math.Abs(audioTime - timeStamp) < errorMargin)
+    //                 Hit();
+    //         }
+    //
+    //         if (timeStamp + errorMargin <= audioTime)
+    //         {
+    //             Miss();
+    //         }
+    //     }
+    //     
+    // }
+    //
+    // void Hit()
+    // {
+    //     Debug.Log("Note hit");
+    // }
+    //
+    // void Miss()
+    // {
+    //     Debug.Log("Note Missed");
+    //     inputIndex++;
+    // }
 }

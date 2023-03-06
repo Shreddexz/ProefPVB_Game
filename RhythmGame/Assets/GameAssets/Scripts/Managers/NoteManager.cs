@@ -26,7 +26,8 @@ public class NoteManager : MonoBehaviour
 
     void Start()
     {
-       ReadFromFile();
+        index = AudioManager.instance.songIndex;
+        ReadFromFile();
     }
 
     /// <summary>
@@ -56,6 +57,7 @@ public class NoteManager : MonoBehaviour
     {
         GetMidiData();
     }
+
     void Update()
     {
     }
