@@ -9,6 +9,7 @@ using Melanchall.DryWetMidi.Interaction;
 
 public class NoteManager : MonoBehaviour
 {
+    public float noteSpeedDistMultiplier;
     public static MidiFile songChart;
     public List<string> chartNames = new();
     public static Note[] notesArray;

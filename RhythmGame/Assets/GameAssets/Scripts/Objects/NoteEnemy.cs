@@ -12,16 +12,18 @@ public class NoteEnemy : MonoBehaviour
     [NonSerialized]
     public bool canMove;
 
+    NoteManager manager;
+
     void Awake()
     {
         canMove = true;
+        manager = GameObject.Find("GameManager").GetComponent<NoteManager>();
     }
 
     void Start()
     {
         timeInstantiated = AudioManager.instance.playbackTime;
-        // moveSpeed = 60 * 4 / AudioManager.bpm;
-        moveSpeed = AudioManager.bpm / 60;
+        moveSpeed = (AudioManager.bpm / 60) * manager.noteSpeedDistMultiplier;
     }
 
     void Update()

@@ -94,8 +94,6 @@ public class AudioManager : MonoBehaviour
     public float noteTime;
     public float noteOffset;
     public double marginOfErrorSeconds;
-
-    public Lane[] lanes;
     public string[] songs;
     public int songIndex;
 
