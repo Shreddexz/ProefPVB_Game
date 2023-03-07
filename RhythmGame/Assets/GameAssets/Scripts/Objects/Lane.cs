@@ -10,14 +10,8 @@ using Note = Melanchall.DryWetMidi.Interaction.Note;
 public class Lane : MonoBehaviour
 {
     public NoteName laneNote;
-
-    public GameObject noteObject;
-    public List<NoteEnemy> notes = new();
     public List<double> timeStamps = new();
-    [NonSerialized]
-    public int noteIndex;
-    int inputIndex;
-
+    int noteIndex;
     NotePooler pooler;
 
     void Awake()
@@ -25,40 +19,24 @@ public class Lane : MonoBehaviour
         pooler = transform.root.GetComponent<NotePooler>();
     }
 
-    ///SPAWN CODE IN HERE REFFERING TO POOLER
-    
-    // void Update()
-    // {
-    //
-    //     if (inputIndex < timeStamps.Count)
-    //     {
-    //         double timeStamp = timeStamps[inputIndex];
-    //         double errorMargin = AudioManager.instance.marginOfErrorSeconds;
-    //         double audioTime = AudioManager.instance.playbackTime -
-    //                            (AudioManager.instance.inputDelayMilliseconds / 1000f);
-    //
-    //         if (Input.GetKeyDown(KeyCode.Alpha1))
-    //         {
-    //             if (Math.Abs(audioTime - timeStamp) < errorMargin)
-    //                 Hit();
-    //         }
-    //
-    //         if (timeStamp + errorMargin <= audioTime)
-    //         {
-    //             Miss();
-    //         }
-    //     }
-    //     
-    // }
-    //
-    // void Hit()
-    // {
-    //     Debug.Log("Note hit");
-    // }
-    //
-    // void Miss()
-    // {
-    //     Debug.Log("Note Missed");
-    //     inputIndex++;
-    // }
+    void Update()
+    {
+        if (timeStamps.Count > 0)
+            CheckNoteConditions();
+    }
+
+    void CheckNoteConditions()
+    {
+        if (AudioManager.playbackState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+            return;
+
+        if (noteIndex >= timeStamps.Count)
+            return;
+
+        if (AudioManager.instance.playbackTime >= timeStamps[noteIndex] - NotePooler.twoBarsDuration)
+        {
+            pooler.SpawnNote(this);
+            noteIndex++;
+        }
+    }
 }

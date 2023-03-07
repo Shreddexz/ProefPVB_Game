@@ -11,7 +11,7 @@ public class NotePooler : MonoBehaviour
     public int notePoolLimit = 15;
     public GameObject noteEnemy;
     double songTime;
-    double twoBarsDuration;
+    public static double twoBarsDuration;
     float spawnOffset;
     float bpm;
     public static Note[] notesArray;
@@ -120,16 +120,16 @@ public class NotePooler : MonoBehaviour
 
     void CheckNoteConditions()
     {
-        if (AudioManager.playbackState == PLAYBACK_STATE.PLAYING)
-            for (int i = 0; i < lanes.Length; i++)
-            {
-                if (lanes[i].noteIndex < lanes[i].timeStamps.Count)
-                    if (songTime >= lanes[i].timeStamps[noteIndex] - twoBarsDuration)
-                    {
-                        SpawnNote(lanes[i]);
-                        lanes[i].noteIndex++;
-                    }
-            }
+        // if (AudioManager.playbackState == PLAYBACK_STATE.PLAYING)
+        //     for (int i = 0; i < lanes.Length; i++)
+        //     {
+        //         if (lanes[i].noteIndex < lanes[i].timeStamps.Count)
+        //             if (songTime >= lanes[i].timeStamps[noteIndex] - twoBarsDuration)
+        //             {
+        //                 SpawnNote(lanes[i]);
+        //                 lanes[i].noteIndex++;
+        //             }
+        //     }
     }
 
     public void SpawnNote(Lane lane)
