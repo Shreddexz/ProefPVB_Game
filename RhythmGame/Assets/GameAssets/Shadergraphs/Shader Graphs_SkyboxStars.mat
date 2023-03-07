@@ -51,7 +51,7 @@ Material:
     - _BUILTIN_QueueOffset: 0
     - _starDensity: 27.2
     - _starOffset: 36
-    - _starSpeedDivision: -175.2
+    - _starSpeedDivision: -172.81
     - _starsSize: 500
     m_Colors: []
   m_BuildTextureStacks: []

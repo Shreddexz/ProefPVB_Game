@@ -124,10 +124,12 @@ public class NotePooler : MonoBehaviour
             note.canMove = true;
             note.gameObject.SetActive(true);
             pooledNotes.Remove(note);
+            lane.activeNotes.Add(note.gameObject);
             return;
         }
 
         Instantiate(noteEnemy, lane.gameObject.transform);
+        lane.activeNotes.Add(noteEnemy);
     }
 
     public void PoolObject(NoteEnemy noteObj)

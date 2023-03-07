@@ -9,14 +9,17 @@ using Note = Melanchall.DryWetMidi.Interaction.Note;
 
 public class Lane : MonoBehaviour
 {
+    public KeyCode laneKey;
     public NoteName laneNote;
     public List<double> timeStamps = new();
+    public List<GameObject> activeNotes;
     int noteIndex;
     NotePooler pooler;
 
     void Awake()
     {
         pooler = transform.root.GetComponent<NotePooler>();
+        activeNotes = new();
     }
 
     void Update()
@@ -38,5 +41,10 @@ public class Lane : MonoBehaviour
             pooler.SpawnNote(this);
             noteIndex++;
         }
+    }
+
+    public void NotePressed()
+    {
+        
     }
 }
