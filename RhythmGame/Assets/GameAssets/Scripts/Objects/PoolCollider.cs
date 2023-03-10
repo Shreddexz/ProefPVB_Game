@@ -10,7 +10,6 @@ public class PoolCollider : MonoBehaviour
     void Awake()
     {
         pooler = transform.root.GetComponent<NotePooler>();
-        Debug.Log(pooler.gameObject.name);
     }
 
     void OnTriggerEnter(Collider other)

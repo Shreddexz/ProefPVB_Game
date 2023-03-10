@@ -6,11 +6,11 @@ using UnityEngine;
 public class NoteEnemy : MonoBehaviour
 {
     public double timeInstantiated;
+
     // double timeSinceSpawn;
     public double arriveTime;
     public float moveSpeed;
-    [NonSerialized]
-    public bool canMove;
+    [NonSerialized] public bool canMove;
 
     NoteManager manager;
 
@@ -22,8 +22,7 @@ public class NoteEnemy : MonoBehaviour
 
     void Start()
     {
-        timeInstantiated = AudioManager.instance.playbackTime;
-        moveSpeed = (AudioManager.bpm / 60) * manager.noteSpeedDistMultiplier;
+        NotePlaced();
     }
 
     void Update()
@@ -35,5 +34,12 @@ public class NoteEnemy : MonoBehaviour
     {
         if (canMove)
             transform.position -= Vector3.forward * moveSpeed * Time.deltaTime;
+    }
+
+    public void NotePlaced()
+    {
+        timeInstantiated = AudioManager.instance.playbackTime;
+        arriveTime = timeInstantiated + SongVariables.twoBarsDuration;
+        moveSpeed = SongVariables.bpm / 60 * manager.noteSpeedDistMultiplier;
     }
 }

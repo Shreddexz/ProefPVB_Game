@@ -12,9 +12,10 @@ public class Lane : MonoBehaviour
     public KeyCode laneKey;
     public NoteName laneNote;
     public List<double> timeStamps = new();
-    public List<GameObject> activeNotes;
+    public List<NoteEnemy> activeNotes;
     int noteIndex;
     NotePooler pooler;
+    bool noteHit;
 
     void Awake()
     {
@@ -36,15 +37,48 @@ public class Lane : MonoBehaviour
         if (noteIndex >= timeStamps.Count)
             return;
 
-        if (AudioManager.instance.playbackTime >= timeStamps[noteIndex] - NotePooler.twoBarsDuration)
+        if (AudioManager.instance.playbackTime >= timeStamps[noteIndex] - SongVariables.twoBarsDuration)
         {
             pooler.SpawnNote(this);
             noteIndex++;
         }
     }
 
-    public void NotePressed()
+    public void NotePressed(double inputTime)
     {
-        
+        if (!SongVariables.infoSet)
+            return;
+
+        double hitTime = activeNotes[0].arriveTime - inputTime;
+
+        if (Math.Abs(hitTime) <=
+            SongVariables.quarterNoteDuration)
+        {
+            Debug.Log("Perfect");
+            Debug.Log($"{Math.Abs(hitTime)} | {SongVariables.quarterNoteDuration}");
+            noteHit = true;
+        }
+        else if (Math.Abs(hitTime) <= SongVariables.halfNoteDuration)
+        {
+            Debug.Log("Good");
+            Debug.Log($"{Math.Abs(hitTime)} | {SongVariables.halfNoteDuration}");
+            noteHit = true;
+        }
+        else if (Math.Abs(hitTime) <= SongVariables.noteDuration)
+        {
+            Debug.Log("OK");
+            Debug.Log($"{Math.Abs(hitTime)} | {SongVariables.noteDuration}");
+            noteHit = true;
+        }
+        else
+        {
+            Debug.Log("Miss");
+        }
+
+        if (noteHit)
+        {
+            pooler.PoolObject(activeNotes[0]);
+            noteHit = false;
+        }
     }
 }

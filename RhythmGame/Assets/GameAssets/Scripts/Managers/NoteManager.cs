@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Interaction;
+using Debug = UnityEngine.Debug;
 
 // using Note = Melanchall.DryWetMidi.MusicTheory.Note;
 
@@ -13,7 +14,7 @@ public class NoteManager : MonoBehaviour
     public static MidiFile songChart;
     public List<string> chartNames = new();
     public static Note[] notesArray;
-    int index = 0;
+    int index;
 
     void OnEnable()
     {
@@ -27,8 +28,14 @@ public class NoteManager : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(SmallWait());
+    }
+
+    IEnumerator SmallWait() //this coroutine is used to prevent a nullreference that shouldnt be happening,
+        //but does happen for some reason.
+    {
+        yield return new WaitForSeconds(0.1f);
         index = AudioManager.instance.songIndex;
-        ReadFromFile();
     }
 
     /// <summary>
@@ -39,6 +46,7 @@ public class NoteManager : MonoBehaviour
     {
         string fileDir = $"{Application.dataPath}/StreamingAssets/{chartNames[index]}.mid";
         songChart = MidiFile.Read(fileDir);
+        GetMidiData();
     }
 
     /// <summary>
@@ -47,6 +55,12 @@ public class NoteManager : MonoBehaviour
     /// </summary>
     void GetMidiData()
     {
+        if (songChart == null)
+        {
+            Debug.Log("Chart not found");
+            return;
+        }
+
         songChart.ReplaceTempoMap(TempoMap.Create(Tempo.FromBeatsPerMinute(AudioManager.bpm)));
         var notes = songChart.GetNotes();
         notesArray = new Note[notes.Count];
@@ -56,10 +70,6 @@ public class NoteManager : MonoBehaviour
 
     void OnInfoReceived()
     {
-        GetMidiData();
-    }
-
-    void Update()
-    {
+        ReadFromFile();
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using FMOD.Studio;
 using UnityEngine;
 using Melanchall.DryWetMidi.Interaction;
@@ -57,7 +58,6 @@ public class NotePooler : MonoBehaviour
     {
         if (AudioManager.bpm != 0f)
         {
-            Debug.Log(AudioManager.bpm);
             bpm = AudioManager.bpm;
             twoBarsDuration = 60 * 8 / bpm;
             spawnOffset = ((60 * 16 / bpm) * manager.noteSpeedDistMultiplier) + 0.5f;
@@ -103,10 +103,10 @@ public class NotePooler : MonoBehaviour
                 case "E4":
                     laneIndex = 2;
                     break;
-
-                default:
-                    laneIndex = 0;
-                    break;
+                //
+                // default:
+                //     laneIndex = 0;
+                //     break;
             }
 
             lanes[laneIndex].timeStamps.Add(noteTime);
@@ -121,27 +121,33 @@ public class NotePooler : MonoBehaviour
             NoteEnemy note = pooledNotes[0];
             if (note.transform.position != lane.gameObject.transform.position)
                 note.transform.position = lane.gameObject.transform.position;
+            note.transform.parent = lane.transform;
             note.canMove = true;
             note.gameObject.SetActive(true);
+            note.NotePlaced();
             pooledNotes.Remove(note);
-            lane.activeNotes.Add(note.gameObject);
+            lane.activeNotes.Add(note);
             return;
         }
 
-        Instantiate(noteEnemy, lane.gameObject.transform);
-        lane.activeNotes.Add(noteEnemy);
+        GameObject spawnedNote = Instantiate(noteEnemy, lane.gameObject.transform);
+        lane.activeNotes.Add(spawnedNote.GetComponent<NoteEnemy>());
     }
 
     public void PoolObject(NoteEnemy noteObj)
     {
+        Lane parentLane = noteObj.transform.parent.GetComponent<Lane>();
+        parentLane.activeNotes.Remove(noteObj);
+
         if (pooledNotes.Count >= notePoolLimit)
         {
             Destroy(noteObj.gameObject);
             return;
         }
 
+        noteObj.gameObject.SetActive(false);
         noteObj.canMove = false;
         pooledNotes.Add(noteObj);
-        noteObj.gameObject.SetActive(false);
+        noteObj.transform.parent = null;
     }
 }
