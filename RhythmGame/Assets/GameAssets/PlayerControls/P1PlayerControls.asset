@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6854813088aaa04a813aaf463b9c883, type: 3}
+  m_Name: P1PlayerControls
+  m_EditorClassIdentifier: 
+  button1: 49
+  button2: 51
+  button3: 53
+  button4: 50
+  button5: 52
+  button6: 54
+  joyL: 97
+  joyR: 100
+  joyU: 119
+  joyD: 115

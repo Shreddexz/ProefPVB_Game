@@ -94,8 +94,6 @@ public class AudioManager : MonoBehaviour
     public float noteTime;
     public float noteOffset;
     public double marginOfErrorSeconds;
-
-    public Lane[] lanes;
     public string[] songs;
     public int songIndex;
 
@@ -225,7 +223,7 @@ public class AudioManager : MonoBehaviour
             musicPlayer.stop(STOP_MODE.ALLOWFADEOUT);
             RuntimeManager.DetachInstanceFromGameObject(musicPlayer);
         }
-        
+
         musicPlayer = RuntimeManager.CreateInstance(FMODEvent(songs[songIndex]));
         RuntimeManager.AttachInstanceToGameObject(musicPlayer, audioObject.transform);
         if (!infoSet)
@@ -349,8 +347,9 @@ public class AudioManager : MonoBehaviour
     {
         GUIStyle boxStyle = new GUIStyle
         {
-            fontSize = 24
+            fontSize = 24,
         };
+        boxStyle.normal.textColor = Color.white;
         GUILayout.Box($"Current beat: {beat} \nSong BPM: {bpm}\nPlaytime: {playTimeString}/{songDuration}", boxStyle,
                       GUILayout.Width(400f), GUILayout.Height(200f));
     }

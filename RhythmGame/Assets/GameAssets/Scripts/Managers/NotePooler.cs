@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using FMOD.Studio;
 using UnityEngine;
 using Melanchall.DryWetMidi.Interaction;
@@ -24,6 +25,7 @@ public class NotePooler : MonoBehaviour
     public static Lane[] lanes;
     public Lane[] lanesCopy;
     static int laneIndex;
+    NoteManager manager;
 
     public Transform spawnPos;
 
@@ -41,11 +43,11 @@ public class NotePooler : MonoBehaviour
     {
         AudioManager.masterSystem.getDSPBufferSize(out uint bufferlength, out int numbuffers);
         audioLatencyMS = (double) numbuffers * bufferlength / AudioManager.instance.masterSampleRate;
-        Debug.Log($"Audio latency = {audioLatencyMS * 1000}ms");
     }
 
     void Awake()
     {
+        manager = transform.GetComponent<NoteManager>();
         lanes = new Lane[lanesCopy.Length];
         bpmSet = false;
         timeStamps = new();
@@ -56,11 +58,9 @@ public class NotePooler : MonoBehaviour
     {
         if (AudioManager.bpm != 0f)
         {
-            Debug.Log(AudioManager.bpm);
             bpm = AudioManager.bpm;
             twoBarsDuration = 60 * 8 / bpm;
-            spawnOffset = 60 * 16 / bpm;
-            // spawnPos.position = new Vector3(0f, 0f, spawnOffset);
+            spawnOffset = ((60 * 16 / bpm) * manager.noteSpeedDistMultiplier) + 0.5f;
             bpmSet = true;
             foreach (var lane in lanes)
             {
@@ -73,9 +73,6 @@ public class NotePooler : MonoBehaviour
     {
         if (!bpmSet)
             GetSongBPM();
-
-        songTime = AudioManager.instance.playbackTime;
-        CheckNoteConditions();
     }
 
     public static void CopyNoteList(Note[] arrayToCopy)
@@ -106,31 +103,16 @@ public class NotePooler : MonoBehaviour
                 case "E4":
                     laneIndex = 2;
                     break;
-
-                default:
-                    laneIndex = 0;
-                    break;
+                //
+                // default:
+                //     laneIndex = 0;
+                //     break;
             }
 
             lanes[laneIndex].timeStamps.Add(noteTime);
-            // timeStamps.Add(noteTime);
         }
     }
 
-
-    void CheckNoteConditions()
-    {
-        // if (AudioManager.playbackState == PLAYBACK_STATE.PLAYING)
-        //     for (int i = 0; i < lanes.Length; i++)
-        //     {
-        //         if (lanes[i].noteIndex < lanes[i].timeStamps.Count)
-        //             if (songTime >= lanes[i].timeStamps[noteIndex] - twoBarsDuration)
-        //             {
-        //                 SpawnNote(lanes[i]);
-        //                 lanes[i].noteIndex++;
-        //             }
-        //     }
-    }
 
     public void SpawnNote(Lane lane)
     {
@@ -139,26 +121,33 @@ public class NotePooler : MonoBehaviour
             NoteEnemy note = pooledNotes[0];
             if (note.transform.position != lane.gameObject.transform.position)
                 note.transform.position = lane.gameObject.transform.position;
+            note.transform.parent = lane.transform;
             note.canMove = true;
             note.gameObject.SetActive(true);
+            note.NotePlaced();
             pooledNotes.Remove(note);
+            lane.activeNotes.Add(note);
             return;
         }
 
-        Instantiate(noteEnemy, lane.gameObject.transform);
+        GameObject spawnedNote = Instantiate(noteEnemy, lane.gameObject.transform);
+        lane.activeNotes.Add(spawnedNote.GetComponent<NoteEnemy>());
     }
 
     public void PoolObject(NoteEnemy noteObj)
     {
+        Lane parentLane = noteObj.transform.parent.GetComponent<Lane>();
+        parentLane.activeNotes.Remove(noteObj);
+
         if (pooledNotes.Count >= notePoolLimit)
         {
             Destroy(noteObj.gameObject);
             return;
         }
 
+        noteObj.gameObject.SetActive(false);
         noteObj.canMove = false;
         pooledNotes.Add(noteObj);
-        noteObj.gameObject.SetActive(false);
-        // noteObj.transform.position = spawnPos.transform.position;
+        noteObj.transform.parent = null;
     }
 }
