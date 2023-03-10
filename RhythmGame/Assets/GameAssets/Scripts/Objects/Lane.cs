@@ -15,11 +15,13 @@ public class Lane : MonoBehaviour
     public List<NoteEnemy> activeNotes;
     int noteIndex;
     NotePooler pooler;
+    ScoreManager scoreManager;
     bool noteHit;
 
     void Awake()
     {
         pooler = transform.root.GetComponent<NotePooler>();
+        scoreManager = transform.root.GetComponent<ScoreManager>();
         activeNotes = new();
     }
 
@@ -44,7 +46,7 @@ public class Lane : MonoBehaviour
         }
     }
 
-    public void NotePressed(double inputTime)
+    public void NotePressed(int playerID, double inputTime)
     {
         if (!SongVariables.infoSet)
             return;
@@ -54,20 +56,17 @@ public class Lane : MonoBehaviour
         if (Math.Abs(hitTime) <=
             SongVariables.quarterNoteDuration)
         {
-            Debug.Log("Perfect");
-            Debug.Log($"{Math.Abs(hitTime)} | {SongVariables.quarterNoteDuration}");
+            scoreManager.AddScore(playerID, "Perfect");
             noteHit = true;
         }
         else if (Math.Abs(hitTime) <= SongVariables.halfNoteDuration)
         {
-            Debug.Log("Good");
-            Debug.Log($"{Math.Abs(hitTime)} | {SongVariables.halfNoteDuration}");
+            scoreManager.AddScore(playerID, "Good");
             noteHit = true;
         }
         else if (Math.Abs(hitTime) <= SongVariables.noteDuration)
         {
-            Debug.Log("OK");
-            Debug.Log($"{Math.Abs(hitTime)} | {SongVariables.noteDuration}");
+            scoreManager.AddScore(playerID, "OK");
             noteHit = true;
         }
         else
