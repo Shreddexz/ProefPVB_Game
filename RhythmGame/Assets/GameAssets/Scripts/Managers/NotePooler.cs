@@ -12,9 +12,7 @@ public class NotePooler : MonoBehaviour
     public int notePoolLimit = 15;
     public GameObject noteEnemy;
     double songTime;
-    public static double twoBarsDuration;
     float spawnOffset;
-    float bpm;
     public static Note[] notesArray;
     public List<NoteEnemy> pooledNotes = new();
     static List<double> timeStamps;
@@ -26,8 +24,6 @@ public class NotePooler : MonoBehaviour
     public Lane[] lanesCopy;
     static int laneIndex;
     NoteManager manager;
-
-    public Transform spawnPos;
 
     void OnEnable()
     {
@@ -41,8 +37,8 @@ public class NotePooler : MonoBehaviour
 
     void OnInfoReceived()
     {
-        AudioManager.masterSystem.getDSPBufferSize(out uint bufferlength, out int numbuffers);
-        audioLatencyMS = (double) numbuffers * bufferlength / AudioManager.instance.masterSampleRate;
+        AudioManager.masterSystem.getDSPBufferSize(out uint bufferLength, out int numBuffers);
+        audioLatencyMS = (double) numBuffers * bufferLength / AudioManager.instance.masterSampleRate;
     }
 
     void Awake()
@@ -58,9 +54,7 @@ public class NotePooler : MonoBehaviour
     {
         if (AudioManager.bpm != 0f)
         {
-            bpm = AudioManager.bpm;
-            twoBarsDuration = 60 * 8 / bpm;
-            spawnOffset = ((60 * 16 / bpm) * manager.noteSpeedDistMultiplier) + 0.5f;
+            spawnOffset = ((60 * 16 / SongVariables.bpm) * manager.noteSpeedDistMultiplier + 3f);
             bpmSet = true;
             foreach (var lane in lanes)
             {
@@ -89,7 +83,6 @@ public class NotePooler : MonoBehaviour
                               audioLatencyMS;
 
             noteConcat = String.Concat(note.NoteName, note.Octave);
-            Debug.Log($"{noteConcat}, {noteTime}");
             switch (noteConcat)
             {
                 case "C4":
@@ -103,10 +96,6 @@ public class NotePooler : MonoBehaviour
                 case "E4":
                     laneIndex = 2;
                     break;
-                //
-                // default:
-                //     laneIndex = 0;
-                //     break;
             }
 
             lanes[laneIndex].timeStamps.Add(noteTime);
@@ -131,6 +120,7 @@ public class NotePooler : MonoBehaviour
         }
 
         GameObject spawnedNote = Instantiate(noteEnemy, lane.gameObject.transform);
+
         lane.activeNotes.Add(spawnedNote.GetComponent<NoteEnemy>());
     }
 

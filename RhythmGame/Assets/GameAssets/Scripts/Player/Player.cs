@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -13,12 +14,12 @@ public class Player : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(controls.button1))
-            lanes[0].NotePressed(SongVariables.playbackTime);
-        
+            lanes[0].NotePressed(playerID, SongVariables.playbackTime);
+
         if (Input.GetKeyDown(controls.button2))
-            lanes[1].NotePressed(SongVariables.playbackTime);
-        
+            lanes[1].NotePressed(playerID, SongVariables.playbackTime);
+
         if (Input.GetKeyDown(controls.button3))
-            lanes[2].NotePressed(SongVariables.playbackTime);
+            lanes[2].NotePressed(playerID, SongVariables.playbackTime);
     }
 }
