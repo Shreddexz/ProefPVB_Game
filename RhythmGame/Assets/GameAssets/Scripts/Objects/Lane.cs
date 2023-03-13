@@ -51,6 +51,12 @@ public class Lane : MonoBehaviour
         if (!SongVariables.infoSet)
             return;
 
+        if (activeNotes.Count <= 0)
+        {
+            scoreManager.ReduceMultiplier(playerID);
+            return;
+        }
+
         double hitTime = activeNotes[0].arriveTime - inputTime;
 
         if (Math.Abs(hitTime) <=
@@ -71,8 +77,9 @@ public class Lane : MonoBehaviour
         }
         else
         {
-            Debug.Log("Miss");
+            scoreManager.ReduceMultiplier(playerID);
         }
+
 
         if (noteHit)
         {

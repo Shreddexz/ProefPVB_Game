@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class NoteEnemy : MonoBehaviour
@@ -11,7 +12,6 @@ public class NoteEnemy : MonoBehaviour
     public double arriveTime;
     public float moveSpeed;
     [NonSerialized] public bool canMove;
-
     NoteManager manager;
 
     void Awake()

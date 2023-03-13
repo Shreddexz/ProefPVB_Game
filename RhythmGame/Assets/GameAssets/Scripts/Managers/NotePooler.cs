@@ -37,8 +37,8 @@ public class NotePooler : MonoBehaviour
 
     void OnInfoReceived()
     {
-        AudioManager.masterSystem.getDSPBufferSize(out uint bufferlength, out int numbuffers);
-        audioLatencyMS = (double) numbuffers * bufferlength / AudioManager.instance.masterSampleRate;
+        AudioManager.masterSystem.getDSPBufferSize(out uint bufferLength, out int numBuffers);
+        audioLatencyMS = (double) numBuffers * bufferLength / AudioManager.instance.masterSampleRate;
     }
 
     void Awake()
@@ -54,7 +54,7 @@ public class NotePooler : MonoBehaviour
     {
         if (AudioManager.bpm != 0f)
         {
-            spawnOffset = ((60 * 16 / SongVariables.bpm) * manager.noteSpeedDistMultiplier) + 0.5f;
+            spawnOffset = ((60 * 16 / SongVariables.bpm) * manager.noteSpeedDistMultiplier + 3f);
             bpmSet = true;
             foreach (var lane in lanes)
             {
@@ -120,6 +120,7 @@ public class NotePooler : MonoBehaviour
         }
 
         GameObject spawnedNote = Instantiate(noteEnemy, lane.gameObject.transform);
+
         lane.activeNotes.Add(spawnedNote.GetComponent<NoteEnemy>());
     }
 
