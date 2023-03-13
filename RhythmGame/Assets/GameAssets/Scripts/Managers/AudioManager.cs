@@ -43,7 +43,7 @@ public class AudioManager : MonoBehaviour
     ulong cachedSamples;
     public string playTimeString;
     public double playbackTime;
-    static string songDuration;
+    public static string songDuration;
     Bus sfxBus;
     Bus musicBus;
 #endregion

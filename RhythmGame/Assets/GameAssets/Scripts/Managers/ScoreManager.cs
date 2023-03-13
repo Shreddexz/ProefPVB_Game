@@ -25,12 +25,14 @@ public class ScoreManager : MonoBehaviour
 
     void UpdateMultiplier()
     {
-        if (p1Score.multiplierValue >= multiplierThresholds[p1Score.multiplierStage])
+        if (p1Score.multiplierStage < multiplierStages.Length - 1 &&
+            p1Score.multiplierValue >= multiplierThresholds[p1Score.multiplierStage])
         {
             IncreaseMultiplier(0);
         }
 
-        if (p2Score.multiplierValue >= multiplierThresholds[p2Score.multiplierStage])
+        if (p2Score.multiplierStage < multiplierStages.Length - 1 &&
+            p2Score.multiplierValue >= multiplierThresholds[p2Score.multiplierStage])
         {
             IncreaseMultiplier(1);
         }
