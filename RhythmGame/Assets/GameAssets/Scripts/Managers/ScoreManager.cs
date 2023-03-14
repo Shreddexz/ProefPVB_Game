@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
@@ -16,6 +17,8 @@ public class ScoreManager : MonoBehaviour
     void Awake()
     {
         p1Score = new();
+        p1Score.multiplier = 1;
+        p2Score.multiplier = 1;
     }
 
     void Update()
@@ -25,12 +28,14 @@ public class ScoreManager : MonoBehaviour
 
     void UpdateMultiplier()
     {
-        if (p1Score.multiplierValue >= multiplierThresholds[p1Score.multiplierStage])
+        if (p1Score.multiplierStage < multiplierStages[^2] &&
+            p1Score.multiplierValue >= multiplierThresholds[p1Score.multiplierStage])
         {
             IncreaseMultiplier(0);
         }
 
-        if (p2Score.multiplierValue >= multiplierThresholds[p2Score.multiplierStage])
+        if (p2Score.multiplierStage < multiplierStages[^2] &&
+            p2Score.multiplierValue >= multiplierThresholds[p2Score.multiplierStage])
         {
             IncreaseMultiplier(1);
         }
@@ -99,16 +104,25 @@ public class ScoreManager : MonoBehaviour
         switch (id)
         {
             case 0:
-                p1Score.multiplierStage--;
+                if (p1Score.multiplierStage > 0)
+                    p1Score.multiplierStage--;
+
+                p1Score.multiplierValue = p1Score.multiplierStage - 1 > 0
+                                              ? multiplierThresholds[p1Score.multiplierStage - 1]
+                                              : 0;
+
                 p1Score.multiplier = multiplication[p1Score.multiplierStage];
-                p1Score.multiplierValue = multiplierStages[p1Score.multiplierStage];
-                p1Score.hitStreak = 0;
                 break;
+
             case 1:
-                p2Score.multiplierStage--;
+                if (p2Score.multiplierStage > 0)
+                    p2Score.multiplierStage--;
+
+                p2Score.multiplierValue = p2Score.multiplierStage - 1 > 0
+                                              ? multiplierThresholds[p2Score.multiplierStage - 1]
+                                              : 0;
+
                 p2Score.multiplier = multiplication[p2Score.multiplierStage];
-                p2Score.multiplierValue = multiplierStages[p2Score.multiplierStage];
-                p2Score.hitStreak = 0;
                 break;
         }
     }

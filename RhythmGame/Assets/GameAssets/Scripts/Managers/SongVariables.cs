@@ -35,7 +35,7 @@ public class SongVariables : MonoBehaviour
         bpm = AudioManager.bpm;
         songBarDuration = (60 * 4) / bpm;
         twoBarsDuration = songBarDuration * 2;
-        noteDuration = 60 / bpm;
+        noteDuration = bpm < 150 ? 60 / bpm / 2 : 60 / bpm;
         halfNoteDuration = noteDuration / 2;
         quarterNoteDuration = noteDuration / 4;
         infoSet = true;
