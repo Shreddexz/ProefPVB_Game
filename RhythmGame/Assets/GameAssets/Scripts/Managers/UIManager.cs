@@ -12,7 +12,9 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI multiText;
 
     [Header("UI Images")] public Image timefill;
-    public Image multiplierFill;
+    public Image multi2xFill;
+    public Image multi4xFill;
+    public Image multi8xFill;
 
 
     void Awake()
@@ -30,7 +32,11 @@ public class UIManager : MonoBehaviour
     {
         scoreText.text = scoreManager.p1Score.score.ToString();
         multiText.text = $"{scoreManager.p1Score.multiplier.ToString()}x";
-        multiplierFill.fillAmount =
+        multi2xFill.fillAmount =
+            (float) scoreManager.p1Score.multiplierValue / scoreManager.multiplierThresholds[1];
+        multi4xFill.fillAmount =
+            (float) scoreManager.p1Score.multiplierValue / scoreManager.multiplierThresholds[2];
+        multi8xFill.fillAmount =
             (float) scoreManager.p1Score.multiplierValue / scoreManager.multiplierThresholds[^1];
     }
 
