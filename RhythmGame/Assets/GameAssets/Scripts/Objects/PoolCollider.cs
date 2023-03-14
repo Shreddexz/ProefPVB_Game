@@ -7,6 +7,7 @@ public class PoolCollider : MonoBehaviour
 {
     public LayerMask noteLayer;
     NotePooler pooler;
+
     void Awake()
     {
         pooler = transform.root.GetComponent<NotePooler>();
@@ -17,7 +18,8 @@ public class PoolCollider : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Note"))
         {
             NoteEnemy enemy = other.gameObject.GetComponent<NoteEnemy>();
-            pooler.PoolObject(enemy);
+            if (!enemy.destroyed)
+                pooler.PoolObject(enemy);
         }
     }
 }
