@@ -84,6 +84,7 @@ public class Lane : MonoBehaviour
         if (noteHit)
         {
             activeNotes[0].Destroy();
+            activeNotes.Remove(activeNotes[0]);
             noteHit = false;
         }
     }

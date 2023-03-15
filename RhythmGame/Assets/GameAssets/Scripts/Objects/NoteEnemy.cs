@@ -13,6 +13,7 @@ public class NoteEnemy : MonoBehaviour
     [NonSerialized] public bool canMove;
     NoteManager manager;
     [NonSerialized] SpawnEffect destructionEffect;
+    public ParticleSystem explosion, flames;
 
     void Awake()
     {
@@ -34,7 +35,7 @@ public class NoteEnemy : MonoBehaviour
     void MoveNote()
     {
         if (canMove)
-            transform.position -= Vector3.forward * moveSpeed * Time.deltaTime;
+            transform.position -= Vector3.forward * (moveSpeed * Time.deltaTime);
     }
 
     public void NotePlaced()
@@ -48,5 +49,8 @@ public class NoteEnemy : MonoBehaviour
     {
         destroyed = true;
         destructionEffect.playEffect = true;
+        GameObject.Destroy(gameObject, 2f);
+        explosion.Play();
+        flames.Play();
     }
 }
