@@ -14,12 +14,18 @@ public class Player : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(controls.button1))
-            lanes[0].NotePressed(playerID, SongVariables.playbackTime);
-
-        if (Input.GetKeyDown(controls.button2))
             lanes[1].NotePressed(playerID, SongVariables.playbackTime);
 
-        if (Input.GetKeyDown(controls.button3))
+        if (Input.GetKeyDown(controls.button2))
             lanes[2].NotePressed(playerID, SongVariables.playbackTime);
+
+        if (Input.GetKeyDown(controls.button3))
+            lanes[3].NotePressed(playerID, SongVariables.playbackTime);
+
+        if (Input.GetKeyDown(controls.joyL))
+            lanes[0].NotePressed(playerID, SongVariables.playbackTime);
+
+        if (Input.GetKeyDown(controls.joyR))
+            lanes[1].NotePressed(playerID, SongVariables.playbackTime);
     }
 }

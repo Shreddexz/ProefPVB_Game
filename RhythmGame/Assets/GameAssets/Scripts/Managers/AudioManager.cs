@@ -158,8 +158,6 @@ public class AudioManager : MonoBehaviour
             Debug.Log("Audiomanager instance already exists. The new instance will be destroyed");
             Destroy(this);
         }
-
-        // songInfo = new SongInfo();
     }
 
     void OnDestroy()
@@ -329,7 +327,7 @@ public class AudioManager : MonoBehaviour
                     Sound sound = new Sound(parameterPtr);
 
                     sound.getLength(out songLength, TIMEUNIT.MS);
-                    TimeSpan songTS = TimeSpan.FromMilliseconds(songLength * 48000 / 1000 / 4.78f);
+                    TimeSpan songTS = TimeSpan.FromMilliseconds(songLength);
                     songDuration = songTS.ToString("mm':'ss");
                     break;
 
