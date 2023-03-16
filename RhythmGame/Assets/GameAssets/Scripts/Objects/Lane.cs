@@ -9,10 +9,11 @@ using Note = Melanchall.DryWetMidi.Interaction.Note;
 
 public class Lane : MonoBehaviour
 {
-    public KeyCode laneKey;
+    public KeyCode laneKeyP1, laneKeyP2;
     public NoteName laneNote;
     public List<double> timeStamps = new();
     public List<NoteEnemy> activeNotes;
+    public List<NoteEnemy> activeNotes2;
     int noteIndex;
     NotePooler pooler;
     ScoreManager scoreManager;
@@ -29,6 +30,8 @@ public class Lane : MonoBehaviour
     {
         if (timeStamps.Count > 0)
             CheckNoteConditions();
+
+        ListNullCheck();
     }
 
     void CheckNoteConditions()
@@ -57,7 +60,7 @@ public class Lane : MonoBehaviour
             return;
         }
 
-        double hitTime = activeNotes[0].arriveTime - inputTime;
+        double hitTime = playerID == 0 ? activeNotes[0].arriveTime - inputTime : activeNotes2[0].arriveTime - inputTime;
 
         if (Math.Abs(hitTime) <=
             SongVariables.quarterNoteDuration)
@@ -83,8 +86,35 @@ public class Lane : MonoBehaviour
 
         if (noteHit)
         {
-            pooler.PoolObject(activeNotes[0]);
+            switch (playerID)
+            {
+                case 0:
+                    activeNotes[0].Destroy();
+                    activeNotes.Remove(activeNotes[0]);
+                    break;
+
+                case 1:
+                    activeNotes2[0].Destroy();
+                    activeNotes.Remove(activeNotes2[0]);
+                    break;
+            }
+
             noteHit = false;
+        }
+    }
+
+    void ListNullCheck()
+    {
+        for (int i = 0; i < activeNotes.Count; i++)
+        {
+            if (activeNotes[i] == null)
+                activeNotes.RemoveAt(i);
+        }
+
+        for (int i = 0; i < activeNotes2.Count; i++)
+        {
+            if (activeNotes2[i] == null)
+                activeNotes2.RemoveAt(i);
         }
     }
 }

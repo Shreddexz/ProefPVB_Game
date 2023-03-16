@@ -85,16 +85,24 @@ public class NotePooler : MonoBehaviour
             noteConcat = String.Concat(note.NoteName, note.Octave);
             switch (noteConcat)
             {
-                case "C4":
+                case "A4":
                     laneIndex = 0;
                     break;
 
-                case "D4":
+                case "C4":
                     laneIndex = 1;
                     break;
 
-                case "E4":
+                case "D4":
                     laneIndex = 2;
+                    break;
+
+                case "E4":
+                    laneIndex = 3;
+                    break;
+
+                case "B4":
+                    laneIndex = 4;
                     break;
             }
 
@@ -110,24 +118,83 @@ public class NotePooler : MonoBehaviour
             NoteEnemy note = pooledNotes[0];
             if (note.transform.position != lane.gameObject.transform.position)
                 note.transform.position = lane.gameObject.transform.position;
+            if (note.gameObject.layer != LayerMask.NameToLayer("p1"))
+                note.gameObject.layer = LayerMask.NameToLayer("p1");
+            foreach (var trans in note.gameObject.GetComponentsInChildren<Transform>())
+            {
+                trans.gameObject.layer = LayerMask.NameToLayer("p1");
+            }
+
             note.transform.parent = lane.transform;
             note.canMove = true;
             note.gameObject.SetActive(true);
             note.NotePlaced();
             pooledNotes.Remove(note);
             lane.activeNotes.Add(note);
+            // if (PlayerManager.multiplayer)
+            // {
+            //     if (pooledNotes.Count <= 0)
+            //     {
+            //         goto NoteSpawn;
+            //     }
+            //
+            //     NoteEnemy notep2 = pooledNotes[0];
+            //     if (notep2.transform.position != lane.gameObject.transform.position)
+            //         notep2.transform.position = lane.gameObject.transform.position;
+            //     notep2.transform.parent = lane.transform;
+            //     notep2.gameObject.layer = LayerMask.NameToLayer("p2");
+            //     foreach (var trans in notep2.GetComponentsInChildren<Transform>())
+            //     {
+            //         trans.gameObject.layer = LayerMask.NameToLayer("p2");
+            //     }
+            //
+            //     notep2.canMove = true;
+            //     notep2.gameObject.SetActive(true);
+            //     notep2.NotePlaced();
+            //     pooledNotes.Remove(notep2);
+            //     lane.activeNotes2.Add(notep2);
+            // }
+            if (PlayerManager.multiplayer)
+                NoteP2Spawn(lane);
             return;
         }
 
         GameObject spawnedNote = Instantiate(noteEnemy, lane.gameObject.transform);
-
         lane.activeNotes.Add(spawnedNote.GetComponent<NoteEnemy>());
+        if (PlayerManager.multiplayer)
+            NoteP2Spawn(lane);
+
+        //     if (!PlayerManager.multiplayer) return;
+        // NoteSpawn:
+        //     GameObject p2Note = Instantiate(noteEnemy, lane.gameObject.transform);
+        //     p2Note.layer = LayerMask.NameToLayer("p2");
+        //     foreach (var trans in p2Note.GetComponentsInChildren<Transform>())
+        //     {
+        //         trans.gameObject.layer = LayerMask.NameToLayer("p2");
+        //     }
+        //
+        //     lane.activeNotes2.Add(p2Note.GetComponent<NoteEnemy>());
+    }
+
+    void NoteP2Spawn(Lane lane)
+    {
+        GameObject p2Note = Instantiate(noteEnemy, lane.gameObject.transform);
+        p2Note.layer = LayerMask.NameToLayer("p2");
+        foreach (var trans in p2Note.GetComponentsInChildren<Transform>())
+        {
+            trans.gameObject.layer = LayerMask.NameToLayer("p2");
+        }
+
+        lane.activeNotes2.Add(p2Note.GetComponent<NoteEnemy>());
     }
 
     public void PoolObject(NoteEnemy noteObj)
     {
         Lane parentLane = noteObj.transform.parent.GetComponent<Lane>();
-        parentLane.activeNotes.Remove(noteObj);
+        if (parentLane.activeNotes.Contains(noteObj))
+            parentLane.activeNotes.Remove(noteObj);
+        else
+            parentLane.activeNotes2.Remove(noteObj);
 
         if (pooledNotes.Count >= notePoolLimit)
         {

@@ -7,17 +7,19 @@ using UnityEngine;
 public class NoteEnemy : MonoBehaviour
 {
     public double timeInstantiated;
-
-    // double timeSinceSpawn;
     public double arriveTime;
     public float moveSpeed;
+    public bool destroyed;
     [NonSerialized] public bool canMove;
     NoteManager manager;
+    [NonSerialized] SpawnEffect destructionEffect;
+    public ParticleSystem explosion, flames;
 
     void Awake()
     {
         canMove = true;
         manager = GameObject.Find("GameManager").GetComponent<NoteManager>();
+        destructionEffect = transform.GetChild(0).GetComponent<SpawnEffect>();
     }
 
     void Start()
@@ -33,7 +35,7 @@ public class NoteEnemy : MonoBehaviour
     void MoveNote()
     {
         if (canMove)
-            transform.position -= Vector3.forward * moveSpeed * Time.deltaTime;
+            transform.position -= Vector3.forward * (moveSpeed * Time.deltaTime);
     }
 
     public void NotePlaced()
@@ -41,5 +43,14 @@ public class NoteEnemy : MonoBehaviour
         timeInstantiated = AudioManager.instance.playbackTime;
         arriveTime = timeInstantiated + SongVariables.twoBarsDuration;
         moveSpeed = SongVariables.bpm / 60 * manager.noteSpeedDistMultiplier;
+    }
+
+    public void Destroy()
+    {
+        destroyed = true;
+        destructionEffect.playEffect = true;
+        GameObject.Destroy(gameObject, 2f);
+        explosion.Play();
+        flames.Play();
     }
 }
