@@ -12,10 +12,10 @@ public class PlayerManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    void Awake()
-    {
-        multiplayer = true;
-    }
+    //void Awake()
+    //{
+    //    multiplayer = true;
+    //}
 
     public void SetMultiplayer(bool isTrue)
     {
