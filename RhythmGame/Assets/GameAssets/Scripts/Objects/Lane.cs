@@ -83,7 +83,8 @@ public class Lane : MonoBehaviour
 
         if (noteHit)
         {
-            pooler.PoolObject(activeNotes[0]);
+            activeNotes[0].Destroy();
+            activeNotes.Remove(activeNotes[0]);
             noteHit = false;
         }
     }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.020924967, g: 0.020924967, b: 0.020924967, a: 1}
+  m_IndirectSpecularColor: {r: 0.01885912, g: 0.01885912, b: 0.01885912, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2632,7 +2632,7 @@ PrefabInstance:
     - target: {fileID: 9017915404572199047, guid: 05253719029cc514fb2d81901fc18ed0, type: 3}
       propertyPath: noteEnemy
       value: 
-      objectReference: {fileID: 5759490914589432995, guid: 90426def7d32ad241ab705151368cc83, type: 3}
+      objectReference: {fileID: 8059124780947473938, guid: b741bd185f8f1aa46b6de997039b1e50, type: 3}
     - target: {fileID: 9017915404572199066, guid: 05253719029cc514fb2d81901fc18ed0, type: 3}
       propertyPath: m_Name
       value: GameManager

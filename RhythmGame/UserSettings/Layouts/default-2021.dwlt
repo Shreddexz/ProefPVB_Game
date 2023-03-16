@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PixelRect:
     serializedVersion: 2
-    x: -1920
-    y: -233
-    width: 1920
+    x: 0
+    y: -1037
+    width: 2560
     height: 997
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Hierarchy
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -44,7 +44,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1920
+    width: 2560
     height: 997
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -69,7 +69,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1920
+    width: 2560
     height: 30
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
@@ -91,7 +91,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 977
-    width: 1920
+    width: 2560
     height: 20
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
@@ -115,12 +115,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 30
-    width: 1920
+    width: 2560
     height: 947
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 12804
+  controlID: 112
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -140,12 +140,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1012
+    width: 1349
     height: 947
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 12755
+  controlID: 76
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -163,10 +163,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1012
+    width: 1349
     height: 496
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -182,24 +182,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ConsoleWindow
+  m_Name: SceneView
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
     x: 0
     y: 496
-    width: 1012
+    width: 1349
     height: 451
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 15}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
   - {fileID: 15}
   - {fileID: 16}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 2
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -217,14 +217,14 @@ MonoBehaviour:
   - {fileID: 11}
   m_Position:
     serializedVersion: 2
-    x: 1012
+    x: 1349
     y: 0
-    width: 560
+    width: 747
     height: 947
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 12862
+  controlID: 113
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -242,10 +242,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 560
+    width: 747
     height: 563
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -269,7 +269,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 563
-    width: 560
+    width: 747
     height: 384
   m_MinSize: {x: 232, y: 271}
   m_MaxSize: {x: 10002, y: 10021}
@@ -293,12 +293,12 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1572
+    x: 2096
     y: 0
-    width: 348
+    width: 464
     height: 947
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -324,9 +324,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: -1920
-    y: -203
-    width: 1011
+    x: 0
+    y: -1007
+    width: 1348
     height: 475
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -374,23 +374,23 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 1011
+      width: 1348
       height: 454
     m_Scale: {x: 0.42037037, y: 0.42037037}
-    m_Translation: {x: 505.5, y: 227}
+    m_Translation: {x: 674, y: 227}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -1202.511
+      x: -1603.348
       y: -540
-      width: 2405.022
+      width: 3206.696
       height: 1080
     m_MinimalGUI: 1
   m_defaultScale: 0.42037037
-  m_LastWindowPixelSize: {x: 1011, y: 475}
+  m_LastWindowPixelSize: {x: 1348, y: 475}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -416,9 +416,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: -1920
-    y: 293
-    width: 1011
+    x: 0
+    y: -511
+    width: 1348
     height: 430
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -429,8 +429,8 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: -101, y: -26}
+      snapOffset: {x: -100, y: -25.600006}
+      snapOffsetDelta: {x: -1, y: -0.3999939}
       snapCorner: 3
       id: Tool Settings
       index: 0
@@ -451,7 +451,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 24.8}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: unity-scene-view-toolbar
@@ -468,23 +468,12 @@ MonoBehaviour:
       id: unity-search-toolbar
       index: 1
       layout: 1
-    - dockPosition: 1
-      containerId: overlay-toolbar__top
-      floating: 1
-      collapsed: 0
-      displayed: 1
-      snapOffset: {x: 150, y: 150}
-      snapOffsetDelta: {x: 0, y: 0}
-      snapCorner: 0
-      id: RiderFlow.SceneToolbar
-      index: 2
-      layout: 1
     - dockPosition: 0
       containerId: overlay-container--left
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 25}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: unity-transform-toolbar
@@ -616,7 +605,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 0
-      snapOffset: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 25}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: Scene View/Particles
@@ -632,9 +621,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 213.5, y: 531.5, z: 0}
+    m_Target: {x: -0.5755279, y: 4.4653244, z: -6.732597}
     speed: 2
-    m_Value: {x: 213.5, y: 531.5, z: 0}
+    m_Value: {x: -1.1940948, y: -0.28923523, z: 0.4066956}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -663,9 +652,9 @@ MonoBehaviour:
       m_Size: {x: 1, y: 1}
     yGrid:
       m_Fade:
-        m_Target: 1
+        m_Target: 0
         speed: 2
-        m_Value: 1
+        m_Value: 0
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
       m_Size: {x: 1, y: 1}
@@ -677,21 +666,21 @@ MonoBehaviour:
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
       m_Size: {x: 1, y: 1}
-    m_ShowGrid: 1
+    m_ShowGrid: 0
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.0014999995, y: 0, z: 0, w: 0.99999887}
+    m_Target: {x: 0.17163341, y: 0.011821626, z: -0.0020597014, w: 0.9850873}
     speed: 2
-    m_Value: {x: -0.0014999995, y: 0, z: 0, w: 0.99999887}
+    m_Value: {x: 0.11598937, y: -0.81713265, z: 0.17673008, w: 0.5362903}
   m_Size:
-    m_Target: 320.0082
+    m_Target: 0.8593869
     speed: 2
-    m_Value: 320.0082
+    m_Value: 1.1926861
   m_Ortho:
-    m_Target: 1
+    m_Target: 0
     speed: 2
-    m_Value: 1
+    m_Value: 0
   m_CameraSettings:
     m_Speed: 1
     m_SpeedNormalized: 0.5
@@ -760,27 +749,977 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: -1920
-    y: 293
-    width: 1011
+    x: 0
+    y: -511
+    width: 1348
     height: 430
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
-  logPanelScroll: {x: 0, y: 0}
+  logPanelScroll: {x: 0, y: -38.106827}
   logPanelSelectedIndex: -1
   logPanelAutoScroll: 1
-  currentFrame: 274755
+  currentFrame: 314252
   logs:
-    lastGrabbedIndex: -1
-    lastGrabbedCount: 0
-    proEntries: []
+    lastGrabbedIndex: 0
+    lastGrabbedCount: 1
+    proEntries:
+    - logType: 3
+      ignore: 0
+      processed: 1
+      tempFilterProcessed: 1
+      remoteEndPoint: Local
+      logPanelVisible: 1
+      logPanelIndex: 0
+      logOutputHeight: -1
+      listIndex: 0
+      nativeIndex: 0
+      nativeIdentifier: -14
+      originalLog: "An error occurred while resolving packages:\n  Project has invalid
+        dependencies:\n    com.singularitygroup.hotreload: Cannot checkout repository
+        [https://gitlab.hotreload.net/root/hot-reload-releases.git]:\n      Error
+        when executing git command. Filtering content:  22% (5/22), 2.55 MiB | 3.69
+        MiB/s\n      Filtering content:  27% (6/22), 2.55 MiB | 3.69 MiB/s\n     
+        Downloading Editor/SingularityGroup.HotReload.Editor.asmdef (657 B)\n     
+        Error downloading object: Editor/SingularityGroup.HotReload.Editor.asmdef
+        (c66a7e4): Smudge error: Error downloading Editor/SingularityGroup.HotReload.Editor.asmdef
+        (c66a7e462e8239e8739b6ace203020d990a8adeb4c4963d7322ec3ff1f589798): [c66a7e462e8239e8739b6ace203020d990a8adeb4c4963d7322ec3ff1f589798]
+        Object does not exist on the server or you don't have permissions to access
+        it: [404] Object does not exist on the server or you don't have permissions
+        to access it\n      Errors logged to E:\\Repos\\ProefPVB_Game\\RhythmGame\\Library\\PackageCache\\.tmp-18256-8NqTrsd090U1\\clone\\.git\\lfs\\logs\\20230315T154539.3915619.log\n     
+        Use `git lfs logs last` to view the log.\n      error: external filter 'git-lfs
+        filter-process' failed\n      fatal: Editor/SingularityGroup.HotReload.Editor.asmdef:
+        smudge filter lfs failed\nA re-import of the project may be required to fix
+        the issue or a manual modification of E:/Repos/ProefPVB_Game/RhythmGame/Packages/manifest.json
+        file."
+      originalStackTrace: "An error occurred while resolving packages:\n  Project
+        has invalid dependencies:\n    com.singularitygroup.hotreload: Cannot checkout
+        repository [https://gitlab.hotreload.net/root/hot-reload-releases.git]:\n     
+        Error when executing git command. Filtering content:  22% (5/22), 2.55 MiB
+        | 3.69 MiB/s\r      Filtering content:  27% (6/22), 2.55 MiB | 3.69 MiB/s\r     
+        Downloading Editor/SingularityGroup.HotReload.Editor.asmdef (657 B)\n     
+        Error downloading object: Editor/SingularityGroup.HotReload.Editor.asmdef
+        (c66a7e4): Smudge error: Error downloading Editor/SingularityGroup.HotReload.Editor.asmdef
+        (c66a7e462e8239e8739b6ace203020d990a8adeb4c4963d7322ec3ff1f589798): [c66a7e462e8239e8739b6ace203020d990a8adeb4c4963d7322ec3ff1f589798]
+        Object does not exist on the server or you don't have permissions to access
+        it: [404] Object does not exist on the server or you don't have permissions
+        to access it\n\n      Errors logged to E:\\Repos\\ProefPVB_Game\\RhythmGame\\Library\\PackageCache\\.tmp-18256-8NqTrsd090U1\\clone\\.git\\lfs\\logs\\20230315T154539.3915619.log\n     
+        Use `git lfs logs last` to view the log.\n      error: external filter 'git-lfs
+        filter-process' failed\n      fatal: Editor/SingularityGroup.HotReload.Editor.asmdef:
+        smudge filter lfs failed\n\n\nA re-import of the project may be required
+        to fix the issue or a manual modification of E:/Repos/ProefPVB_Game/RhythmGame/Packages/manifest.json
+        file.\n"
+      nativeFileName: 
+      nativeFileNamePretty: 
+      nativeLineNumber: 0
+      watchName: 
+      logText: "An error occurred while resolving packages:\n  Project has invalid
+        dependencies:\n    com.singularitygroup.hotreload: Cannot checkout repository
+        [https://gitlab.hotreload.net/root/hot-reload-releases.git]:\n      Error
+        when executing git command. Filtering content:  22% (5/22), 2.55 MiB | 3.69
+        MiB/s\n      Filtering content:  27% (6/22), 2.55 MiB | 3.69 MiB/s\n     
+        Downloading Editor/SingularityGroup.HotReload.Editor.asmdef (657 B)\n     
+        Error downloading object: Editor/SingularityGroup.HotReload.Editor.asmdef
+        (c66a7e4): Smudge error: Error downloading Editor/SingularityGroup.HotReload.Editor.asmdef
+        (c66a7e462e8239e8739b6ace203020d990a8adeb4c4963d7322ec3ff1f589798): [c66a7e462e8239e8739b6ace203020d990a8adeb4c4963d7322ec3ff1f589798]
+        Object does not exist on the server or you don't have permissions to access
+        it: [404] Object does not exist on the server or you don't have permissions
+        to access it\n      Errors logged to E:\\Repos\\ProefPVB_Game\\RhythmGame\\Library\\PackageCache\\.tmp-18256-8NqTrsd090U1\\clone\\.git\\lfs\\logs\\20230315T154539.3915619.log\n     
+        Use `git lfs logs last` to view the log.\n      error: external filter 'git-lfs
+        filter-process' failed\n      fatal: Editor/SingularityGroup.HotReload.Editor.asmdef:
+        smudge filter lfs failed\nA re-import of the project may be required to fix
+        the issue or a manual modification of E:/Repos/ProefPVB_Game/RhythmGame/Packages/manifest.json
+        file."
+      logTruncatedText: "An error occurred while resolving packages:\n  Project has
+        invalid dependencies:\n    com.singularitygroup.hotreload: Cannot checkout
+        repository [https://gitlab.hotreload.net/root/hot-reload-releases.git]:\n     
+        Error when executing git command. Filtering content:  22% (5/22), 2.55 MiB
+        | 3.69 MiB/s\n      Filtering content:  27% (6/22), 2.55 MiB | 3.69 MiB/s\n     
+        Downloading Editor/SingularityGroup.HotReload.Editor.asmdef (657 B)\n     
+        Error downloading object: Editor/SingularityGroup.HotReload.Ed\n..."
+      logColumnText: 
+      fileName: 
+      className: 
+      namespaceName: 
+      lineCount: 12
+      hasSourceCode: 0
+      timeStamp: 16:30:17.695
+      timeFrame: 5
+      timeStampDateTimeNow: 16:30:17.695
+      instanceID: 0
+      collapsedCount: 1
+      cachedHeight: -1
+      cachedHeightLogWidth: 0
+      stackEntries: []
+      ignoredStackEntries: []
+      lastMatchedCount: 1
+      belongsToFilters:
+      - name: Error
+        isEnabled: 1
+        collapsed: 0
+        itemGUID: 736077e7-16f6-4b87-9d0b-5950f39b2639
+        filterName: 
+        mainColor: {r: 1, g: 0, b: 0, a: 0.7}
+        isStandardFilter: 1
+        isTempFilter: 0
+        filterOnly: 0
+        useAdvancedColors: 1
+        customTextColor: {r: 1, g: 1, b: 1, a: 1}
+        customBackgroundColor: {r: 1, g: 0, b: 0, a: 0.7}
+        swallowStandard: 1
+        standardCanSwallow: 0
+        overrideStandardColors: 1
+        overrideStandardIcon: 1
+        collapseIconBackground: 0
+        collapseIconSymbol: 0
+        collapseIconLetter: 0
+        collapseIconTexture: 0
+        useIconBackground: 1
+        useIconSymbol: 0
+        useIconLetter: 1
+        useIconTexture: 0
+        filterFormatVersion: 1
+        iconColorize: 0
+        useAndOpForSearchList: 0
+        searchList:
+          list:
+          - name: 
+            isEnabled: 1
+            collapsed: 0
+            itemGUID: 7338d5d4-ab2d-4920-95c4-8b9477e6bd9d
+            searchString: <Any>
+            searchType: 1
+            removeSearchStringFromLog: 0
+            logTypeList:
+              list:
+              - name: 
+                isEnabled: 1
+                collapsed: 0
+                itemGUID: 250fdec0-acc3-4809-9360-7429bd5b553f
+                logType: 3
+              - name: 
+                isEnabled: 1
+                collapsed: 0
+                itemGUID: 112b441d-c7a8-4e48-a1b4-0387322258d7
+                logType: 6
+              selectionList: 0
+              collapsable: 1
+              collapsed: 0
+            columnTypeList:
+              list:
+              - name: 
+                isEnabled: 1
+                collapsed: 0
+                itemGUID: cbf09244-5988-4e27-b0cf-77baada7dfed
+                columnType: 1
+              selectionList: 0
+              collapsable: 1
+              collapsed: 0
+            sourceCodeList:
+              list: []
+              selectionList: 0
+              collapsable: 1
+              collapsed: 0
+          selectionList: 0
+          collapsable: 1
+          collapsed: 0
+        iconLetter:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 3
+          iconType2: 1
+          iconText: X
+          useIconTextFirstLetter: 0
+          useIconLogColor: 0
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 7
+        iconSymbol:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 1
+          iconType2: 1
+          iconText: A
+          useIconTextFirstLetter: 1
+          useIconLogColor: 1
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 13
+        iconBackground:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 1
+          iconType2: 1
+          iconText: A
+          useIconTextFirstLetter: 1
+          useIconLogColor: 1
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 13
+        iconTexture:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 1
+          iconType2: 1
+          iconText: A
+          useIconTextFirstLetter: 1
+          useIconLogColor: 1
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 13
+        showInToolbar: 1
+        hideLabelInToolbar: 0
+        hideWhenNoMatches: 0
+      belongsToStandardFilters:
+      - name: Error
+        isEnabled: 1
+        collapsed: 0
+        itemGUID: 736077e7-16f6-4b87-9d0b-5950f39b2639
+        filterName: 
+        mainColor: {r: 1, g: 0, b: 0, a: 0.7}
+        isStandardFilter: 1
+        isTempFilter: 0
+        filterOnly: 0
+        useAdvancedColors: 1
+        customTextColor: {r: 1, g: 1, b: 1, a: 1}
+        customBackgroundColor: {r: 1, g: 0, b: 0, a: 0.7}
+        swallowStandard: 1
+        standardCanSwallow: 0
+        overrideStandardColors: 1
+        overrideStandardIcon: 1
+        collapseIconBackground: 0
+        collapseIconSymbol: 0
+        collapseIconLetter: 0
+        collapseIconTexture: 0
+        useIconBackground: 1
+        useIconSymbol: 0
+        useIconLetter: 1
+        useIconTexture: 0
+        filterFormatVersion: 1
+        iconColorize: 0
+        useAndOpForSearchList: 0
+        searchList:
+          list:
+          - name: 
+            isEnabled: 1
+            collapsed: 0
+            itemGUID: 7338d5d4-ab2d-4920-95c4-8b9477e6bd9d
+            searchString: <Any>
+            searchType: 1
+            removeSearchStringFromLog: 0
+            logTypeList:
+              list:
+              - name: 
+                isEnabled: 1
+                collapsed: 0
+                itemGUID: 250fdec0-acc3-4809-9360-7429bd5b553f
+                logType: 3
+              - name: 
+                isEnabled: 1
+                collapsed: 0
+                itemGUID: 112b441d-c7a8-4e48-a1b4-0387322258d7
+                logType: 6
+              selectionList: 0
+              collapsable: 1
+              collapsed: 0
+            columnTypeList:
+              list:
+              - name: 
+                isEnabled: 1
+                collapsed: 0
+                itemGUID: cbf09244-5988-4e27-b0cf-77baada7dfed
+                columnType: 1
+              selectionList: 0
+              collapsable: 1
+              collapsed: 0
+            sourceCodeList:
+              list: []
+              selectionList: 0
+              collapsable: 1
+              collapsed: 0
+          selectionList: 0
+          collapsable: 1
+          collapsed: 0
+        iconLetter:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 3
+          iconType2: 1
+          iconText: X
+          useIconTextFirstLetter: 0
+          useIconLogColor: 0
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 7
+        iconSymbol:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 1
+          iconType2: 1
+          iconText: A
+          useIconTextFirstLetter: 1
+          useIconLogColor: 1
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 13
+        iconBackground:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 1
+          iconType2: 1
+          iconText: A
+          useIconTextFirstLetter: 1
+          useIconLogColor: 1
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 13
+        iconTexture:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 1
+          iconType2: 1
+          iconText: A
+          useIconTextFirstLetter: 1
+          useIconLogColor: 1
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 13
+        showInToolbar: 1
+        hideLabelInToolbar: 0
+        hideWhenNoMatches: 0
+      assignedTempFilter:
+        name: 
+        isEnabled: 1
+        collapsed: 0
+        itemGUID: 
+        filterName: 
+        mainColor: {r: 1, g: 1, b: 1, a: 1}
+        isStandardFilter: 0
+        isTempFilter: 0
+        filterOnly: 0
+        useAdvancedColors: 0
+        customTextColor: {r: 1, g: 1, b: 1, a: 1}
+        customBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
+        swallowStandard: 1
+        standardCanSwallow: 0
+        overrideStandardColors: 1
+        overrideStandardIcon: 1
+        collapseIconBackground: 0
+        collapseIconSymbol: 0
+        collapseIconLetter: 0
+        collapseIconTexture: 0
+        useIconBackground: 1
+        useIconSymbol: 0
+        useIconLetter: 0
+        useIconTexture: 0
+        filterFormatVersion: -1
+        iconColorize: 0
+        useAndOpForSearchList: 0
+        searchList:
+          list: []
+          selectionList: 0
+          collapsable: 1
+          collapsed: 0
+        iconLetter:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 1
+          iconType2: 1
+          iconText: A
+          useIconTextFirstLetter: 1
+          useIconLogColor: 1
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 13
+        iconSymbol:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 1
+          iconType2: 1
+          iconText: A
+          useIconTextFirstLetter: 1
+          useIconLogColor: 1
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 13
+        iconBackground:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 1
+          iconType2: 1
+          iconText: A
+          useIconTextFirstLetter: 1
+          useIconLogColor: 1
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 13
+        iconTexture:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 1
+          iconType2: 1
+          iconText: A
+          useIconTextFirstLetter: 1
+          useIconLogColor: 1
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 13
+        showInToolbar: 1
+        hideLabelInToolbar: 0
+        hideWhenNoMatches: 0
     newEntries: []
     resetCompilerErrorEntries: 1
     compilerErrorEntries: []
     timeFrames: 
-    _filteredEntries: []
+    _filteredEntries:
+    - logType: 3
+      ignore: 0
+      processed: 1
+      tempFilterProcessed: 1
+      remoteEndPoint: Local
+      logPanelVisible: 1
+      logPanelIndex: 0
+      logOutputHeight: -1
+      listIndex: 0
+      nativeIndex: 0
+      nativeIdentifier: -14
+      originalLog: "An error occurred while resolving packages:\n  Project has invalid
+        dependencies:\n    com.singularitygroup.hotreload: Cannot checkout repository
+        [https://gitlab.hotreload.net/root/hot-reload-releases.git]:\n      Error
+        when executing git command. Filtering content:  22% (5/22), 2.55 MiB | 3.69
+        MiB/s\n      Filtering content:  27% (6/22), 2.55 MiB | 3.69 MiB/s\n     
+        Downloading Editor/SingularityGroup.HotReload.Editor.asmdef (657 B)\n     
+        Error downloading object: Editor/SingularityGroup.HotReload.Editor.asmdef
+        (c66a7e4): Smudge error: Error downloading Editor/SingularityGroup.HotReload.Editor.asmdef
+        (c66a7e462e8239e8739b6ace203020d990a8adeb4c4963d7322ec3ff1f589798): [c66a7e462e8239e8739b6ace203020d990a8adeb4c4963d7322ec3ff1f589798]
+        Object does not exist on the server or you don't have permissions to access
+        it: [404] Object does not exist on the server or you don't have permissions
+        to access it\n      Errors logged to E:\\Repos\\ProefPVB_Game\\RhythmGame\\Library\\PackageCache\\.tmp-18256-8NqTrsd090U1\\clone\\.git\\lfs\\logs\\20230315T154539.3915619.log\n     
+        Use `git lfs logs last` to view the log.\n      error: external filter 'git-lfs
+        filter-process' failed\n      fatal: Editor/SingularityGroup.HotReload.Editor.asmdef:
+        smudge filter lfs failed\nA re-import of the project may be required to fix
+        the issue or a manual modification of E:/Repos/ProefPVB_Game/RhythmGame/Packages/manifest.json
+        file."
+      originalStackTrace: "An error occurred while resolving packages:\n  Project
+        has invalid dependencies:\n    com.singularitygroup.hotreload: Cannot checkout
+        repository [https://gitlab.hotreload.net/root/hot-reload-releases.git]:\n     
+        Error when executing git command. Filtering content:  22% (5/22), 2.55 MiB
+        | 3.69 MiB/s\r      Filtering content:  27% (6/22), 2.55 MiB | 3.69 MiB/s\r     
+        Downloading Editor/SingularityGroup.HotReload.Editor.asmdef (657 B)\n     
+        Error downloading object: Editor/SingularityGroup.HotReload.Editor.asmdef
+        (c66a7e4): Smudge error: Error downloading Editor/SingularityGroup.HotReload.Editor.asmdef
+        (c66a7e462e8239e8739b6ace203020d990a8adeb4c4963d7322ec3ff1f589798): [c66a7e462e8239e8739b6ace203020d990a8adeb4c4963d7322ec3ff1f589798]
+        Object does not exist on the server or you don't have permissions to access
+        it: [404] Object does not exist on the server or you don't have permissions
+        to access it\n\n      Errors logged to E:\\Repos\\ProefPVB_Game\\RhythmGame\\Library\\PackageCache\\.tmp-18256-8NqTrsd090U1\\clone\\.git\\lfs\\logs\\20230315T154539.3915619.log\n     
+        Use `git lfs logs last` to view the log.\n      error: external filter 'git-lfs
+        filter-process' failed\n      fatal: Editor/SingularityGroup.HotReload.Editor.asmdef:
+        smudge filter lfs failed\n\n\nA re-import of the project may be required
+        to fix the issue or a manual modification of E:/Repos/ProefPVB_Game/RhythmGame/Packages/manifest.json
+        file.\n"
+      nativeFileName: 
+      nativeFileNamePretty: 
+      nativeLineNumber: 0
+      watchName: 
+      logText: "An error occurred while resolving packages:\n  Project has invalid
+        dependencies:\n    com.singularitygroup.hotreload: Cannot checkout repository
+        [https://gitlab.hotreload.net/root/hot-reload-releases.git]:\n      Error
+        when executing git command. Filtering content:  22% (5/22), 2.55 MiB | 3.69
+        MiB/s\n      Filtering content:  27% (6/22), 2.55 MiB | 3.69 MiB/s\n     
+        Downloading Editor/SingularityGroup.HotReload.Editor.asmdef (657 B)\n     
+        Error downloading object: Editor/SingularityGroup.HotReload.Editor.asmdef
+        (c66a7e4): Smudge error: Error downloading Editor/SingularityGroup.HotReload.Editor.asmdef
+        (c66a7e462e8239e8739b6ace203020d990a8adeb4c4963d7322ec3ff1f589798): [c66a7e462e8239e8739b6ace203020d990a8adeb4c4963d7322ec3ff1f589798]
+        Object does not exist on the server or you don't have permissions to access
+        it: [404] Object does not exist on the server or you don't have permissions
+        to access it\n      Errors logged to E:\\Repos\\ProefPVB_Game\\RhythmGame\\Library\\PackageCache\\.tmp-18256-8NqTrsd090U1\\clone\\.git\\lfs\\logs\\20230315T154539.3915619.log\n     
+        Use `git lfs logs last` to view the log.\n      error: external filter 'git-lfs
+        filter-process' failed\n      fatal: Editor/SingularityGroup.HotReload.Editor.asmdef:
+        smudge filter lfs failed\nA re-import of the project may be required to fix
+        the issue or a manual modification of E:/Repos/ProefPVB_Game/RhythmGame/Packages/manifest.json
+        file."
+      logTruncatedText: "An error occurred while resolving packages:\n  Project has
+        invalid dependencies:\n    com.singularitygroup.hotreload: Cannot checkout
+        repository [https://gitlab.hotreload.net/root/hot-reload-releases.git]:\n     
+        Error when executing git command. Filtering content:  22% (5/22), 2.55 MiB
+        | 3.69 MiB/s\n      Filtering content:  27% (6/22), 2.55 MiB | 3.69 MiB/s\n     
+        Downloading Editor/SingularityGroup.HotReload.Editor.asmdef (657 B)\n     
+        Error downloading object: Editor/SingularityGroup.HotReload.Ed\n..."
+      logColumnText: 
+      fileName: 
+      className: 
+      namespaceName: 
+      lineCount: 12
+      hasSourceCode: 0
+      timeStamp: 16:30:17.695
+      timeFrame: 5
+      timeStampDateTimeNow: 16:30:17.695
+      instanceID: 0
+      collapsedCount: 1
+      cachedHeight: -1
+      cachedHeightLogWidth: 0
+      stackEntries: []
+      ignoredStackEntries: []
+      lastMatchedCount: 1
+      belongsToFilters:
+      - name: Error
+        isEnabled: 1
+        collapsed: 0
+        itemGUID: 736077e7-16f6-4b87-9d0b-5950f39b2639
+        filterName: 
+        mainColor: {r: 1, g: 0, b: 0, a: 0.7}
+        isStandardFilter: 1
+        isTempFilter: 0
+        filterOnly: 0
+        useAdvancedColors: 1
+        customTextColor: {r: 1, g: 1, b: 1, a: 1}
+        customBackgroundColor: {r: 1, g: 0, b: 0, a: 0.7}
+        swallowStandard: 1
+        standardCanSwallow: 0
+        overrideStandardColors: 1
+        overrideStandardIcon: 1
+        collapseIconBackground: 0
+        collapseIconSymbol: 0
+        collapseIconLetter: 0
+        collapseIconTexture: 0
+        useIconBackground: 1
+        useIconSymbol: 0
+        useIconLetter: 1
+        useIconTexture: 0
+        filterFormatVersion: 1
+        iconColorize: 0
+        useAndOpForSearchList: 0
+        searchList:
+          list:
+          - name: 
+            isEnabled: 1
+            collapsed: 0
+            itemGUID: 7338d5d4-ab2d-4920-95c4-8b9477e6bd9d
+            searchString: <Any>
+            searchType: 1
+            removeSearchStringFromLog: 0
+            logTypeList:
+              list:
+              - name: 
+                isEnabled: 1
+                collapsed: 0
+                itemGUID: 250fdec0-acc3-4809-9360-7429bd5b553f
+                logType: 3
+              - name: 
+                isEnabled: 1
+                collapsed: 0
+                itemGUID: 112b441d-c7a8-4e48-a1b4-0387322258d7
+                logType: 6
+              selectionList: 0
+              collapsable: 1
+              collapsed: 0
+            columnTypeList:
+              list:
+              - name: 
+                isEnabled: 1
+                collapsed: 0
+                itemGUID: cbf09244-5988-4e27-b0cf-77baada7dfed
+                columnType: 1
+              selectionList: 0
+              collapsable: 1
+              collapsed: 0
+            sourceCodeList:
+              list: []
+              selectionList: 0
+              collapsable: 1
+              collapsed: 0
+          selectionList: 0
+          collapsable: 1
+          collapsed: 0
+        iconLetter:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 3
+          iconType2: 1
+          iconText: X
+          useIconTextFirstLetter: 0
+          useIconLogColor: 0
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 7
+        iconSymbol:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 1
+          iconType2: 1
+          iconText: A
+          useIconTextFirstLetter: 1
+          useIconLogColor: 1
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 13
+        iconBackground:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 1
+          iconType2: 1
+          iconText: A
+          useIconTextFirstLetter: 1
+          useIconLogColor: 1
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 13
+        iconTexture:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 1
+          iconType2: 1
+          iconText: A
+          useIconTextFirstLetter: 1
+          useIconLogColor: 1
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 13
+        showInToolbar: 1
+        hideLabelInToolbar: 0
+        hideWhenNoMatches: 0
+      belongsToStandardFilters:
+      - name: Error
+        isEnabled: 1
+        collapsed: 0
+        itemGUID: 736077e7-16f6-4b87-9d0b-5950f39b2639
+        filterName: 
+        mainColor: {r: 1, g: 0, b: 0, a: 0.7}
+        isStandardFilter: 1
+        isTempFilter: 0
+        filterOnly: 0
+        useAdvancedColors: 1
+        customTextColor: {r: 1, g: 1, b: 1, a: 1}
+        customBackgroundColor: {r: 1, g: 0, b: 0, a: 0.7}
+        swallowStandard: 1
+        standardCanSwallow: 0
+        overrideStandardColors: 1
+        overrideStandardIcon: 1
+        collapseIconBackground: 0
+        collapseIconSymbol: 0
+        collapseIconLetter: 0
+        collapseIconTexture: 0
+        useIconBackground: 1
+        useIconSymbol: 0
+        useIconLetter: 1
+        useIconTexture: 0
+        filterFormatVersion: 1
+        iconColorize: 0
+        useAndOpForSearchList: 0
+        searchList:
+          list:
+          - name: 
+            isEnabled: 1
+            collapsed: 0
+            itemGUID: 7338d5d4-ab2d-4920-95c4-8b9477e6bd9d
+            searchString: <Any>
+            searchType: 1
+            removeSearchStringFromLog: 0
+            logTypeList:
+              list:
+              - name: 
+                isEnabled: 1
+                collapsed: 0
+                itemGUID: 250fdec0-acc3-4809-9360-7429bd5b553f
+                logType: 3
+              - name: 
+                isEnabled: 1
+                collapsed: 0
+                itemGUID: 112b441d-c7a8-4e48-a1b4-0387322258d7
+                logType: 6
+              selectionList: 0
+              collapsable: 1
+              collapsed: 0
+            columnTypeList:
+              list:
+              - name: 
+                isEnabled: 1
+                collapsed: 0
+                itemGUID: cbf09244-5988-4e27-b0cf-77baada7dfed
+                columnType: 1
+              selectionList: 0
+              collapsable: 1
+              collapsed: 0
+            sourceCodeList:
+              list: []
+              selectionList: 0
+              collapsable: 1
+              collapsed: 0
+          selectionList: 0
+          collapsable: 1
+          collapsed: 0
+        iconLetter:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 3
+          iconType2: 1
+          iconText: X
+          useIconTextFirstLetter: 0
+          useIconLogColor: 0
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 7
+        iconSymbol:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 1
+          iconType2: 1
+          iconText: A
+          useIconTextFirstLetter: 1
+          useIconLogColor: 1
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 13
+        iconBackground:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 1
+          iconType2: 1
+          iconText: A
+          useIconTextFirstLetter: 1
+          useIconLogColor: 1
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 13
+        iconTexture:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 1
+          iconType2: 1
+          iconText: A
+          useIconTextFirstLetter: 1
+          useIconLogColor: 1
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 13
+        showInToolbar: 1
+        hideLabelInToolbar: 0
+        hideWhenNoMatches: 0
+      assignedTempFilter:
+        name: 
+        isEnabled: 1
+        collapsed: 0
+        itemGUID: 
+        filterName: 
+        mainColor: {r: 1, g: 1, b: 1, a: 1}
+        isStandardFilter: 0
+        isTempFilter: 0
+        filterOnly: 0
+        useAdvancedColors: 0
+        customTextColor: {r: 1, g: 1, b: 1, a: 1}
+        customBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
+        swallowStandard: 1
+        standardCanSwallow: 0
+        overrideStandardColors: 1
+        overrideStandardIcon: 1
+        collapseIconBackground: 0
+        collapseIconSymbol: 0
+        collapseIconLetter: 0
+        collapseIconTexture: 0
+        useIconBackground: 1
+        useIconSymbol: 0
+        useIconLetter: 0
+        useIconTexture: 0
+        filterFormatVersion: -1
+        iconColorize: 0
+        useAndOpForSearchList: 0
+        searchList:
+          list: []
+          selectionList: 0
+          collapsable: 1
+          collapsed: 0
+        iconLetter:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 1
+          iconType2: 1
+          iconText: A
+          useIconTextFirstLetter: 1
+          useIconLogColor: 1
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 13
+        iconSymbol:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 1
+          iconType2: 1
+          iconText: A
+          useIconTextFirstLetter: 1
+          useIconLogColor: 1
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 13
+        iconBackground:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 1
+          iconType2: 1
+          iconText: A
+          useIconTextFirstLetter: 1
+          useIconLogColor: 1
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 13
+        iconTexture:
+          name: 
+          isEnabled: 1
+          collapsed: 0
+          itemGUID: 
+          iconType: 1
+          iconType2: 1
+          iconText: A
+          useIconTextFirstLetter: 1
+          useIconLogColor: 1
+          iconColor: {r: 1, g: 1, b: 1, a: 1}
+          iconBuiltInID: BACKGROUNDS_ECPBGROUNDEDSQUARE
+          iconTextureGUID: 
+          useIconShadow: 1
+          iconOffset: {x: 0, y: 0}
+          iconShadowOffset: {x: 0.5, y: 0.5}
+          iconSize: 13
+        showInToolbar: 1
+        hideLabelInToolbar: 0
+        hideWhenNoMatches: 0
 --- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -801,9 +1740,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: -908
-    y: -203
-    width: 558
+    x: 1349
+    y: -1007
+    width: 745
     height: 542
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -812,9 +1751,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: a66b0000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: f031ffff2836ffff6c47ffffc0ccffff18d2ffff24d7ffff00fbfffff06600003a670000
+      m_ExpandedIDs: a6f2fffff4f4ffff36f6ffffdcf8ffffe6f8fffffef8ffff02fbffff9267000030680000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -886,9 +1825,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: -908
-    y: 360
-    width: 558
+    x: 1349
+    y: -444
+    width: 745
     height: 363
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -907,22 +1846,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/GameAssets/Prefabs/Enemies
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets
+  - Assets/GameAssets/Prefabs/Enemies
   m_LastFoldersGridSize: 16
-  m_LastProjectPath: D:\Repos\ProefPVB_Game\RhythmGame
+  m_LastProjectPath: E:\Repos\ProefPVB_Game\RhythmGame
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 6a6b0000
-    m_LastClickedID: 27498
-    m_ExpandedIDs: 000000006a6b00006c6b00006e6b0000706b0000726b0000746b0000766b0000786b00007a6b00007c6b000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 127}
+    m_SelectedIDs: 16670000
+    m_LastClickedID: 26390
+    m_ExpandedIDs: 00000000666500007065000080650000fa660000fc6600000e67000010670000806e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -950,7 +1889,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000006a6b00006c6b00006e6b0000706b0000726b0000746b0000766b0000786b00007a6b00007c6b000000ca9a3bffffff7f
+    m_ExpandedIDs: 0000000066650000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -981,18 +1920,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: e860000074820000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Enemies
+      m_OriginalName: Enemies
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 26390
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 11}
     m_CreateAssetUtility:
@@ -1026,9 +1965,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: -348
-    y: -203
-    width: 347
+    x: 2096
+    y: -1007
+    width: 463
     height: 926
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -1041,7 +1980,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 0
+  m_LastVerticalScrollValue: 108
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
