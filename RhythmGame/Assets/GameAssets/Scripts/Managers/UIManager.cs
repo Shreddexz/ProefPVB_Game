@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class UIManager : MonoBehaviour
 {
@@ -24,19 +26,57 @@ public class UIManager : MonoBehaviour
     public RectTransform readyPanel;
     public TextMeshProUGUI p1ready, p2ready;
 
+    [Header("ScoreScreen")]
+    public RectTransform scoreScreen;
+    public RectTransform p2ScoreTab;
+    public TextMeshProUGUI p1score, p2score;
+    public TextMeshProUGUI p1streak, p2streak;
+    public TextMeshProUGUI p1hstreak, p2hstreak;
+    public TextMeshProUGUI p1hit, p2hit;
+    public TextMeshProUGUI p1missed, p2missed;
+    public TextMeshProUGUI winnerText;
     private void OnEnable()
     {
         PlayerManager.AllReady += OnPlayersReady;
+        AudioManager.OnMusicStopped += OnGameEnd;
     }
 
     private void OnDisable()
     {
         PlayerManager.AllReady -= OnPlayersReady;
+        AudioManager.OnMusicStopped -= OnGameEnd;
+
     }
 
     void OnPlayersReady()
     {
         readyPanel.gameObject.SetActive(false);
+    }
+
+    void OnGameEnd()
+    {
+        scoreScreen.gameObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(GameObject.Find("MainMenuButton"));
+        p1score.text = $"Score: {scoreManager.p1Score.score}";
+        p1streak.text = $"Final streak: {scoreManager.p1Score.hitStreak}";
+        p1hstreak.text = $"Highest streak: {scoreManager.p1Score.highestHitStreak}";
+        p1hit.text = $"Notes hit: {scoreManager.p1Score.hitNotes}";
+        p1missed.text = $"Notes missed: {scoreManager.p1Score.missedNotes}";
+
+        if (PlayerManager.multiplayer)
+        {
+            p2ScoreTab.gameObject.SetActive(true);
+            p2score.text = $"Score: {scoreManager.p2Score.score}";
+            p2streak.text = $"Final streak: {scoreManager.p2Score.hitStreak}";
+            p2hstreak.text = $"Highest streak: {scoreManager.p2Score.highestHitStreak}";
+            p2hit.text = $"Notes hit: {scoreManager.p2Score.hitNotes}";
+            p2missed.text = $"Notes missed: {scoreManager.p2Score.missedNotes}";
+            winnerText.gameObject.SetActive(true);
+            if (scoreManager.p1Score.score == scoreManager.p2Score.score)
+                winnerText.text = "Draw!";
+            else
+                winnerText.text = scoreManager.p1Score.score > scoreManager.p2Score.score ? "Player 1 wins!" : "Player 2 wins!";
+        }
     }
 
     void Awake()
@@ -100,4 +140,6 @@ public class UIManager : MonoBehaviour
         timefill.fillAmount =
             ((float)SongVariables.playbackTime / (AudioManager.songLength / 10)) * 100;
     }
+
+    public void LoadGameScene(string sceneName) => SceneManager.LoadScene(sceneName);
 }

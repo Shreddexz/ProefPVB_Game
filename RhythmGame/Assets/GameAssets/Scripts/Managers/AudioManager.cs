@@ -59,6 +59,9 @@ public class AudioManager : MonoBehaviour
     public static VolumeChangedDelegate MusicVolumeChangedDelegate;
 
     public static MusicStateChange onMusicStart;
+    public static MusicStateChange OnMusicStopped;
+    public static bool musicStopped;
+    public static bool musicPlayed;
 
     public static TimelineInfoSet onInfoReceived;
     #endregion
@@ -149,6 +152,8 @@ public class AudioManager : MonoBehaviour
 
         RuntimeManager.CoreSystem.getMasterChannelGroup(out masterChannelGroup);
         RuntimeManager.CoreSystem.getSoftwareFormat(out masterSampleRate, out SPEAKERMODE mode, out int speakerNum);
+        musicPlayed = false;
+        musicStopped = false;
     }
 
     void Start()
@@ -194,11 +199,7 @@ public class AudioManager : MonoBehaviour
 
         if (sfxVolume != c_sfxVolume)
             SfxVolumeChangedDelegate?.Invoke();
-
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    onMusicStart?.Invoke();
-        //}
+        SfxVolumeChangedDelegate?.Invoke();
 
         masterChannelGroup.getDSPClock(out dspClock, out parentDSP);
 
@@ -208,6 +209,12 @@ public class AudioManager : MonoBehaviour
         TimeSpan playTimeTS = TimeSpan.FromSeconds(currentTime);
         playTimeString = playTimeTS.ToString("mm':'ss");
         playbackTime = currentTime;
+
+        if (playbackTime >= songLength / 1000 && musicPlayed)
+        {
+            OnMusicStopped?.Invoke();
+            musicStopped = true;
+        }
     }
 
     #region Music
@@ -230,12 +237,20 @@ public class AudioManager : MonoBehaviour
             GetSongInfo();
         musicPlayer.start();
         musicPlayer.setPaused(false);
+        //musicPlayed = true;
+        StartCoroutine(smallWait());
+    }
+
+    IEnumerator smallWait()
+    {
+        yield return new WaitForSeconds(2);
+        musicPlayed = true;
     }
 
     void OnMusicStart()
     {
         paused = false;
-        playbackState = PLAYBACK_STATE.PLAYING;
+        //playbackState = PLAYBACK_STATE.PLAYING;
         cachedSamples = dspClock;
         StartSongPlayback();
     }
