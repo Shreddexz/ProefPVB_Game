@@ -70,6 +70,7 @@ public class ScoreManager : MonoBehaviour
                     p1Score.highestHitStreak = p1Score.hitStreak;
                 p1Score.score += scoreGain * p1Score.multiplier;
                 p1Score.multiplierValue += scoreGain * p1Score.multiplier;
+                p1Score.hitNotes++;
                 break;
 
             case 1:
@@ -78,6 +79,7 @@ public class ScoreManager : MonoBehaviour
                     p2Score.highestHitStreak = p2Score.hitStreak;
                 p2Score.score += scoreGain * p2Score.multiplier;
                 p2Score.multiplierValue += scoreGain * p2Score.multiplier;
+                p2Score.hitNotes++;
                 break;
         }
     }
@@ -145,5 +147,6 @@ public class ScoreManager : MonoBehaviour
         public int multiplierValue;
         public int multiplierStage;
         public int missedNotes;
+        public int hitNotes;
     }
 }
