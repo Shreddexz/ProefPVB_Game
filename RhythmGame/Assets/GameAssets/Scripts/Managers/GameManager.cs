@@ -6,13 +6,14 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject player1, player2;
+    public Canvas p1UI, p2UI;
     public float splitscreenFOV = 80f;
     Camera p2cam;
 
     void Start()
     {
         if (PlayerManager.multiplayer)
-        SplitScreen();
+            SplitScreen();
     }
 
     void SplitScreen()
@@ -23,5 +24,12 @@ public class GameManager : MonoBehaviour
         p2cam.fieldOfView = splitscreenFOV;
         Camera.main.rect = new Rect(0f, 0f, 0.5f, 1f);
         Camera.main.fieldOfView = splitscreenFOV;
+        p1UI.scaleFactor = 0.5f;
+        p2UI.scaleFactor = 0.5f;
+        RectTransform p1panel = p1UI.transform.GetChild(0).GetComponent<RectTransform>();
+        RectTransform p2panel = p2UI.transform.GetChild(0).GetComponent<RectTransform>();
+
+        p1panel.transform.position = new Vector2(p1panel.transform.position.x - 500f, p1panel.transform.position.y + 200f);
+        p2panel.transform.position = new Vector2(p2panel.transform.position.x + 500f, p2panel.transform.position.y + 200f);
     }
 }

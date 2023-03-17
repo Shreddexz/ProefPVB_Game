@@ -17,19 +17,19 @@ using INITFLAGS = FMOD.INITFLAGS;
 
 public class AudioManager : MonoBehaviour
 {
-#region Variables
+    #region Variables
     public static bool paused;
     public static AudioManager instance;
     public static bool infoSet;
 
-#region MIDIVars
+    #region MIDIVars
     public static MidiFile songChart;
     public string chartName;
     public static string chartDir;
-#endregion
+    #endregion
 
 
-#region FMODVars
+    #region FMODVars
     public static FMOD.System masterSystem;
     EVENT_CALLBACK beatCallback;
     public static PLAYBACK_STATE playbackState;
@@ -46,9 +46,9 @@ public class AudioManager : MonoBehaviour
     public static string songDuration;
     Bus sfxBus;
     Bus musicBus;
-#endregion
+    #endregion
 
-#region EventVars
+    #region EventVars
     public delegate void VolumeChangedDelegate();
 
     public delegate void MusicStateChange();
@@ -61,15 +61,15 @@ public class AudioManager : MonoBehaviour
     public static MusicStateChange onMusicStart;
 
     public static TimelineInfoSet onInfoReceived;
-#endregion
+    #endregion
 
-#region VolumeMixerVars
-    [SerializeField] [Range(0f, 1f)] float sfxVolume = 0f;
+    #region VolumeMixerVars
+    [SerializeField][Range(0f, 1f)] float sfxVolume = 0f;
     float c_sfxVolume;
 
-    [SerializeField] [Range(0f, 1f)] float musicVolume = 0f;
+    [SerializeField][Range(0f, 1f)] float musicVolume = 0f;
     float c_musicVolume;
-#endregion
+    #endregion
 
     [StructLayout(LayoutKind.Sequential)] //this places the variables sequentially
     //in the memory to access it quicker and more easily.
@@ -105,9 +105,9 @@ public class AudioManager : MonoBehaviour
         string output = $"event:/{eventName}";
         return output;
     }
-#endregion
+    #endregion
 
-#region Start/Exit calls
+    #region Start/Exit calls
     void OnEnable()
     {
         MusicVolumeChangedDelegate += MusicVolumeChanged;
@@ -115,6 +115,7 @@ public class AudioManager : MonoBehaviour
         onMusicStart += OnMusicStart;
 
         onInfoReceived += OnInfoReceived;
+        PlayerManager.AllReady += OnPlayersReady;
     }
 
     void OnDisable()
@@ -123,6 +124,7 @@ public class AudioManager : MonoBehaviour
         SfxVolumeChangedDelegate -= SFXVolumeChanged;
         onMusicStart -= OnMusicStart;
         onInfoReceived -= OnInfoReceived;
+        PlayerManager.AllReady -= OnPlayersReady;
         musicPlayer.stop(STOP_MODE.ALLOWFADEOUT);
         musicPlayer.release();
         masterSystem.release();
@@ -155,7 +157,6 @@ public class AudioManager : MonoBehaviour
             instance = this;
         else
         {
-            Debug.Log("Audiomanager instance already exists. The new instance will be destroyed");
             Destroy(this);
         }
     }
@@ -165,9 +166,10 @@ public class AudioManager : MonoBehaviour
         musicPlayer.setUserData(IntPtr.Zero);
         musicPlayer.stop(STOP_MODE.ALLOWFADEOUT);
         musicPlayer.release();
-        timelineHandle.Free();
+        if (timelineHandle.IsAllocated)
+            timelineHandle.Free();
     }
-#endregion
+    #endregion
 
     void Update()
     {
@@ -193,10 +195,10 @@ public class AudioManager : MonoBehaviour
         if (sfxVolume != c_sfxVolume)
             SfxVolumeChangedDelegate?.Invoke();
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            onMusicStart?.Invoke();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    onMusicStart?.Invoke();
+        //}
 
         masterChannelGroup.getDSPClock(out dspClock, out parentDSP);
 
@@ -208,7 +210,7 @@ public class AudioManager : MonoBehaviour
         playbackTime = currentTime;
     }
 
-#region Music
+    #region Music
     /// <summary>
     /// Creates an instance of the music event, and starts it.
     /// If another instance is already playing, it stops that instance and creates a new one in its place
@@ -242,9 +244,9 @@ public class AudioManager : MonoBehaviour
     {
         infoSet = true;
     }
-#endregion
+    #endregion
 
-#region Mixer
+    #region Mixer
     void MusicVolumeChanged()
     {
         c_musicVolume = musicVolume;
@@ -256,9 +258,9 @@ public class AudioManager : MonoBehaviour
         c_sfxVolume = sfxVolume;
         sfxBus.setVolume(c_sfxVolume);
     }
-#endregion
+    #endregion
 
-#region FMOD
+    #region FMOD
     /// <summary>
     /// Sets up the variables for retrieving data from the FMOD timeline,
     /// and pins the SongInfo instance to the memory to prevent garbage collection
@@ -309,9 +311,9 @@ public class AudioManager : MonoBehaviour
                     if (songInfo == null)
                         songInfo = new SongInfo();
                     GCHandle timelineHandle = GCHandle.FromIntPtr(infoPtr);
-                    songInfo = (SongInfo) timelineHandle.Target;
+                    songInfo = (SongInfo)timelineHandle.Target;
                     var songVars =
-                        (TIMELINE_BEAT_PROPERTIES) Marshal.PtrToStructure(parameterPtr,
+                        (TIMELINE_BEAT_PROPERTIES)Marshal.PtrToStructure(parameterPtr,
                                                                           typeof(TIMELINE_BEAT_PROPERTIES));
                     beat = songVars.beat;
                     bpm = songVars.tempo;
@@ -338,7 +340,7 @@ public class AudioManager : MonoBehaviour
 
         return RESULT.OK;
     }
-#endregion
+    #endregion
 
 #if UNITY_EDITOR
     void OnGUI()
@@ -352,4 +354,9 @@ public class AudioManager : MonoBehaviour
                       GUILayout.Width(400f), GUILayout.Height(200f));
     }
 #endif
+
+    void OnPlayersReady()
+    {
+        onMusicStart?.Invoke();
+    }
 }

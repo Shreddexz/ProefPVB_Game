@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controls: {fileID: 11400000, guid: 4aae34d1492bb964693b481e758411a9, type: 2}
   playerID: 0
+  isReady: 0
   lanes:
   - {fileID: 0}
   - {fileID: 0}
