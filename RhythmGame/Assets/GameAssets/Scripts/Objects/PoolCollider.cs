@@ -15,6 +15,10 @@ public class PoolCollider : MonoBehaviour
         scoreManager = transform.root.GetComponent<ScoreManager>();
     }
 
+    /// <summary>
+    /// Checks for the layer of the note that collided with this collider, and reduces the multiplier of the player that missed the note.
+    /// </summary>
+    /// <param name="other"></param>
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("p1"))

@@ -6,13 +6,12 @@ using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Interaction;
 using Debug = UnityEngine.Debug;
 
-// using Note = Melanchall.DryWetMidi.MusicTheory.Note;
-
 public class NoteManager : MonoBehaviour
 {
-    public float noteSpeedDistMultiplier;
+    public float noteSpeedDistMultiplier;//A global multiplier that is used for the speed of the notes, and the distance of the spawnpoints.
+    //This makes it possible for notes to spawn further away from the player, while still being perfectly in time.
     public static MidiFile songChart;
-    public List<string> chartNames = new();
+    public List<string> chartNames = new();//A list of all the MIDI chart names
     public static Note[] notesArray;
     int index;
 
@@ -61,13 +60,15 @@ public class NoteManager : MonoBehaviour
             return;
         }
 
-        songChart.ReplaceTempoMap(TempoMap.Create(Tempo.FromBeatsPerMinute(AudioManager.bpm)));
+        songChart.ReplaceTempoMap(TempoMap.Create(Tempo.FromBeatsPerMinute(AudioManager.bpm)));//makes sure the BPM is the same as the song's BPM
         var notes = songChart.GetNotes();
         notesArray = new Note[notes.Count];
         notes.CopyTo(notesArray, 0);
         NotePooler.CopyNoteList(notesArray);
     }
-
+    /// <summary>
+    /// When the FMOD timeline info is retrieved, the method that reads the data from the MIDI chart is called.
+    /// </summary>
     void OnInfoReceived()
     {
         ReadFromFile();

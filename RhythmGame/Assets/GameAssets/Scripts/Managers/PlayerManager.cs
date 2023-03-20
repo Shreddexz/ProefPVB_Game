@@ -12,7 +12,7 @@ public class PlayerManager : MonoBehaviour
     public static bool multiplayer;
     public static bool playersReady;
 
-    public delegate void ReadyUpDelegate();
+    public delegate void ReadyUpDelegate();//A delegate that is used for the ready-up mechanics.
 
     public static ReadyUpDelegate ReadyUp;
     public static ReadyUpDelegate AllReady;
@@ -53,12 +53,21 @@ public class PlayerManager : MonoBehaviour
         else
             playersReady = player1.isReady && player2.isReady ? true : false;
     }
-
+    /// <summary>
+    /// This method is used to set the multiplayer boolean by clicking a button.
+    /// </summary>
+    /// <param name="isTrue"></param>
     public void SetMultiplayer(bool isTrue)
     {
         multiplayer = isTrue;
     }
 
+    /// <summary>
+    /// When a scene is loaded, the name is checked for "Gameplay", which is the scene in which the game is played.
+    /// If it returns true, other methods can be called.
+    /// </summary>
+    /// <param name="scene"></param>
+    /// <param name="mode"></param>
     public void OnGameLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "Gameplay")
@@ -67,14 +76,20 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This coroutine waits for the player(s) to ready up, and fires the event that starts the game when it returns true.
+    /// </summary>
     IEnumerator WaitForReady()
     {
-
         while (!playersReady)
             yield return null;
         AllReady?.Invoke();
     }
 
+    /// <summary>
+    /// Returns the player components in the scene, and then proceeds to fire off the event that starts the ready up process.
+    /// To prevent a null-reference exception when looking got the player components, there is a small wait at the start of the coroutine.
+    /// </summary>
     IEnumerator LoadWait()
     {
         yield return new WaitForSeconds(0.2f);

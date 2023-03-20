@@ -22,14 +22,8 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     public static bool infoSet;
 
-    #region MIDIVars
-    public static MidiFile songChart;
-    public string chartName;
-    public static string chartDir;
-    #endregion
-
-
     #region FMODVars
+    //FMOD related variables, mostly containing timeline information
     public static FMOD.System masterSystem;
     EVENT_CALLBACK beatCallback;
     public static PLAYBACK_STATE playbackState;
@@ -49,6 +43,7 @@ public class AudioManager : MonoBehaviour
     #endregion
 
     #region EventVars
+    //delegates and events
     public delegate void VolumeChangedDelegate();
 
     public delegate void MusicStateChange();
@@ -67,6 +62,8 @@ public class AudioManager : MonoBehaviour
     #endregion
 
     #region VolumeMixerVars
+    //variables for the mixer volumes, which haven't been used, but have been set up with the intention
+    //of giving the user control over the volume from within the settings.
     [SerializeField][Range(0f, 1f)] float sfxVolume = 0f;
     float c_sfxVolume;
 
@@ -74,6 +71,10 @@ public class AudioManager : MonoBehaviour
     float c_musicVolume;
     #endregion
 
+
+    ///<summary>
+    ///Contains variables to retreive from the timeline callbacks.
+    ///</summary>
     [StructLayout(LayoutKind.Sequential)] //this places the variables sequentially
     //in the memory to access it quicker and more easily.
     public class SongInfo
@@ -240,13 +241,19 @@ public class AudioManager : MonoBehaviour
         //musicPlayed = true;
         StartCoroutine(smallWait());
     }
-
+    /// <summary>
+    /// a coroutine that waits for a small amount of time, used to make sure that the endscreen can't show up when the music starts playing
+    /// </summary>
     IEnumerator smallWait()
     {
         yield return new WaitForSeconds(2);
         musicPlayed = true;
     }
 
+    /// <summary>
+    /// An event that is called when the music starts playing.
+    /// This is made so that other methods can be started when the playback starts
+    /// </summary>
     void OnMusicStart()
     {
         paused = false;
@@ -255,6 +262,10 @@ public class AudioManager : MonoBehaviour
         StartSongPlayback();
     }
 
+    /// <summary>
+    /// This event is called when the timeline information has been retrieved.
+    /// This was necessary to prevent null-reference exceptions in external methods.
+    /// </summary>
     void OnInfoReceived()
     {
         infoSet = true;
@@ -334,7 +345,6 @@ public class AudioManager : MonoBehaviour
                     bpm = songVars.tempo;
                     if (!infoSet)
                     {
-                        // masterSystem.setDSPBufferSize(512, 4);
                         onInfoReceived?.Invoke();
                     }
 
@@ -358,6 +368,9 @@ public class AudioManager : MonoBehaviour
     #endregion
 
 #if UNITY_EDITOR
+    /// <summary>
+    /// Displays song info on the screen in the editor.
+    /// </summary>
     void OnGUI()
     {
         GUIStyle boxStyle = new GUIStyle

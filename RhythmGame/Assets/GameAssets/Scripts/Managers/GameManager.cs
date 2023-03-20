@@ -16,6 +16,10 @@ public class GameManager : MonoBehaviour
             SplitScreen();
     }
 
+    /// <summary>
+    /// If the game is being played with 2 players, this method will split the screen and adjust the UI's to be placed accordingly.
+    /// This prevents the UI from taking up space it shouldnt.
+    /// </summary>
     void SplitScreen()
     {
         player2.gameObject.SetActive(true);

@@ -6,6 +6,9 @@ using TMPro;
 using UnityEngine.EventSystems;
 using System;
 
+/// <summary>
+/// Displays info about the song that's being hovered on in the menu
+/// </summary>
 public class SongButtons : MonoBehaviour, ISelectHandler
 {
     public TextMeshProUGUI songNameText;
@@ -16,11 +19,19 @@ public class SongButtons : MonoBehaviour, ISelectHandler
     public float songDurationSeconds;
     public songDifficulty difficulty;
 
+    /// <summary>
+    /// When hovering on this item, a method gets called to display the data in the UI
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnSelect(BaseEventData eventData)
     {
         ShowSongInfo();
     }
 
+    /// <summary>
+    /// when hovering stops, remove data from UI
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnDeselect(BaseEventData eventData)
     {
         songNameText.text = string.Empty;
@@ -28,6 +39,9 @@ public class SongButtons : MonoBehaviour, ISelectHandler
         songDifText.text = string.Empty;
     }
 
+    /// <summary>
+    /// Display data from this song in the UI
+    /// </summary>
     public void ShowSongInfo()
     {
         songNameText.text = songName;
@@ -36,6 +50,10 @@ public class SongButtons : MonoBehaviour, ISelectHandler
         songDifText.text = difficulty.ToString();
     }
 
+
+    /// <summary>
+    /// Difficulty selection in a dropdown
+    /// </summary>
     public enum songDifficulty
     {
         easy,

@@ -7,7 +7,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public PlayerControls controls;
-    public int playerID;
+    public int playerID;//ID to differentiate the players
     public bool isReady;
     public bool checkingReady;
 
@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        // readies the player if the confirm button is pressed
         if (checkingReady)
         {
             if (Input.GetKeyDown(controls.button1))
@@ -49,13 +50,21 @@ public class Player : MonoBehaviour
             lanes[0].NotePressed(playerID, SongVariables.playbackTime);
 
         if (Input.GetKeyDown(controls.joyR))
-            lanes[1].NotePressed(playerID, SongVariables.playbackTime);
+            lanes[4].NotePressed(playerID, SongVariables.playbackTime);
     }
 
+    /// <summary>
+    /// This method is called when the OnReadyUp event is invoked.
+    /// </summary>
     void OnReadyUp()
     {
         StartCoroutine(WaitForReady());
     }
+
+    /// <summary>
+    /// This coroutine waits for the player to ready up.
+    /// </summary>
+
     IEnumerator WaitForReady()
     {
         checkingReady = true;
