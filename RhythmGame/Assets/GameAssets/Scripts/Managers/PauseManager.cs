@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//this script hasnt been used or finished, because other functionality was prioritized 
 public class PauseManager : MonoBehaviour
 {
     public static bool isPaused;

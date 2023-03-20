@@ -4,13 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+
+/// <summary>
+/// Manages the score of the player(s), and everything related to it like the multipliers, and the amount of hit notes.
+/// </summary>
 public class ScoreManager : MonoBehaviour
 {
     [NonSerialized] public ScoreInstance p1Score;
     [NonSerialized] public ScoreInstance p2Score;
-    public int[] multiplierStages;
-    public int[] multiplication;
-    public int[] multiplierThresholds;
+    public int[] multiplierStages;//a list of the multiplierstages.
+    public int[] multiplication;//a list of multiplication values.
+    public int[] multiplierThresholds;//a list of thresholds for each multiplier stage.
 
     public int perfectScore = 50, goodScore = 20, okScore = 10;
 
@@ -26,6 +30,9 @@ public class ScoreManager : MonoBehaviour
         UpdateMultiplier();
     }
 
+    /// <summary>
+    /// checks the multipliervalue of the player, and updates the multiplier when a threshold is hit
+    /// </summary>
     void UpdateMultiplier()
     {
         if (p1Score.multiplierStage < multiplierStages[^2] &&
@@ -41,6 +48,12 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Adds scorevalue to the player based on the hittype, which is multiplied by the multiplier of the player before being added to their score.
+    /// Also sets the score multipliervalue, the hitstreak and the amount of hit notes.
+    /// </summary>
+    /// <param name="id">player ID to add score to a player instance</param>
+    /// <param name="hitType">Perfect, Good, OK. Each one has a different score value</param>
     public void AddScore(int id, string hitType)
     {
         int scoreGain;
@@ -84,12 +97,10 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public void AddPlayer()
-    {
-        p2Score = new();
-        p2Score.multiplier = 1;
-    }
-
+    /// <summary>
+    /// increase the player multiplier stage by one
+    /// </summary>
+    /// <param name="id"></param>
     public void IncreaseMultiplier(int id)
     {
         switch (id)
@@ -105,6 +116,10 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Resets the player multiplier to the previous stage, and sets the multiplier score accordingly.
+    /// </summary>
+    /// <param name="id"></param>
     public void ReduceMultiplier(int id)
     {
         switch (id)
@@ -137,7 +152,9 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Contains the variables that are used for the player scores.
+    /// </summary>
     public struct ScoreInstance
     {
         public int score;

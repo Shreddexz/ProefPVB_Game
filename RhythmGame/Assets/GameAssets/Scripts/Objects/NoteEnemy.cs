@@ -32,12 +32,20 @@ public class NoteEnemy : MonoBehaviour
         MoveNote();
     }
 
+    /// <summary>
+    /// moves the note at a constant speed
+    /// </summary>
     void MoveNote()
     {
         if (canMove)
             transform.position -= Vector3.forward * (moveSpeed * Time.deltaTime);
     }
 
+    /// <summary>
+    /// Sets the movementspeed to the song's BPM to sync everything with the music, sets the time the note was instantiated,
+    /// and sets the time the note arrives at the indicator line.
+    /// Called when the note is (re)instantiated;
+    /// </summary>
     public void NotePlaced()
     {
         timeInstantiated = AudioManager.instance.playbackTime;
@@ -45,11 +53,15 @@ public class NoteEnemy : MonoBehaviour
         moveSpeed = SongVariables.bpm / 60 * manager.noteSpeedDistMultiplier;
     }
 
+
+    /// <summary>
+    /// Plays the destruction effect of the spaceships, and destroys this object after 2 seconds.
+    /// </summary>
     public void Destroy()
     {
         destroyed = true;
         destructionEffect.playEffect = true;
-        GameObject.Destroy(gameObject, 2f);
+        Destroy(gameObject, 2f);
         explosion.Play();
         flames.Play();
     }

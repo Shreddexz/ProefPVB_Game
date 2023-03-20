@@ -617,5 +617,9 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 555392444}
+    - target: {fileID: 8127350920272784206, guid: 64d19d64316ae514b9969dc16040e5cf, type: 3}
+      propertyPath: difficulty
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64d19d64316ae514b9969dc16040e5cf, type: 3}

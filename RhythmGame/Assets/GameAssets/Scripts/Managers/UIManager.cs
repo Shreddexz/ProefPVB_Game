@@ -48,11 +48,18 @@ public class UIManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// This method is called when the players are readied, which then hides the ready-up panel
+    /// </summary>
     void OnPlayersReady()
     {
         readyPanel.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// This method is called when the song ends, which then shows the player score.
+    /// When playing with multiplayer, the scores are compared, and the winner is shown.
+    /// </summary>
     void OnGameEnd()
     {
         scoreScreen.gameObject.SetActive(true);
@@ -93,6 +100,10 @@ public class UIManager : MonoBehaviour
         SongElements();
         ReadyPanel();
     }
+
+    /// <summary>
+    /// Activates and updates the ready-up panel for both single- and multiplayer.
+    /// </summary>
     void ReadyPanel()
     {
         if (!PlayerManager.playersReady)
@@ -111,6 +122,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// Updates the score, the multiplier and the multiplier bar fill for the player(s).
+    /// </summary>
     void PlayerScore()
     {
         scoreText.text = scoreManager.p1Score.score.ToString();
@@ -135,11 +150,19 @@ public class UIManager : MonoBehaviour
             (float)scoreManager.p2Score.multiplierValue / scoreManager.multiplierThresholds[^1];
     }
 
+    /// <summary>
+    /// Shows and updates a bar that shows how long the current song lasts.
+    /// </summary>
     void SongElements()
     {
         timefill.fillAmount =
             ((float)SongVariables.playbackTime / (AudioManager.songLength / 10)) * 100;
     }
 
+    /// <summary>
+    /// Load a scene by name.
+    /// Used for loading the main menu scene after finishing the song.
+    /// </summary>
+    /// <param name="sceneName"></param>
     public void LoadGameScene(string sceneName) => SceneManager.LoadScene(sceneName);
 }

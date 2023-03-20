@@ -11,11 +11,9 @@ public class NotePooler : MonoBehaviour
 {
     public int notePoolLimit = 15;
     public GameObject noteEnemy;
-    double songTime;
     float spawnOffset;
     public static Note[] notesArray;
     public List<NoteEnemy> pooledNotes = new();
-    static List<double> timeStamps;
     static double audioLatencyMS;
     bool bpmSet;
     int noteIndex;
@@ -35,10 +33,14 @@ public class NotePooler : MonoBehaviour
         AudioManager.onMusicStart -= OnInfoReceived;
     }
 
+    /// <summary>
+    /// When info is received from the FMOD timeline, this method calculates the audiolatency in ms
+    /// based on the amount of buffers, the bufferlenght, and the samplerate of the audio bus.
+    /// </summary>
     void OnInfoReceived()
     {
         AudioManager.masterSystem.getDSPBufferSize(out uint bufferLength, out int numBuffers);
-        audioLatencyMS = (double) numBuffers * bufferLength / AudioManager.instance.masterSampleRate;
+        audioLatencyMS = (double)numBuffers * bufferLength / AudioManager.instance.masterSampleRate;
     }
 
     void Awake()
@@ -46,10 +48,12 @@ public class NotePooler : MonoBehaviour
         manager = transform.GetComponent<NoteManager>();
         lanes = new Lane[lanesCopy.Length];
         bpmSet = false;
-        timeStamps = new();
         lanesCopy.CopyTo(lanes, 0);
     }
 
+    /// <summary>
+    /// Retrieves the BPM of the current song, and calculates the offset for the note spawn position based on the BPM.
+    /// </summary>
     void GetSongBPM()
     {
         if (AudioManager.bpm != 0f)
@@ -69,12 +73,21 @@ public class NotePooler : MonoBehaviour
             GetSongBPM();
     }
 
+
+    /// <summary>
+    /// Copies the values of an notetimes list without having to create unnecessary references, and calls the method to use the list values.
+    /// </summary>
+    /// <param name="arrayToCopy"></param>
     public static void CopyNoteList(Note[] arrayToCopy)
     {
         notesArray = arrayToCopy;
         AddNotesTimes();
     }
 
+    /// <summary>
+    /// Parses the note data and adds the notetimes to dedicated lanes based on the note played.
+    /// To factor in audio latency, the audioLatencyMS is added on top of the notetime before being sent to the lane.
+    /// </summary>
     static void AddNotesTimes()
     {
         foreach (var note in notesArray)
@@ -82,7 +95,7 @@ public class NotePooler : MonoBehaviour
             double noteTime = note.TimeAs<MetricTimeSpan>(NoteManager.songChart.GetTempoMap()).TotalSeconds +
                               audioLatencyMS;
 
-            noteConcat = String.Concat(note.NoteName, note.Octave);
+            noteConcat = string.Concat(note.NoteName, note.Octave);
             switch (noteConcat)
             {
                 case "A4":
@@ -110,7 +123,11 @@ public class NotePooler : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Spawns a note object in the designated lane when called.
+    /// When there are pooled note available, the pooled note is reinstantiated in the lane instead of a new one being spawned.
+    /// </summary>
+    /// <param name="lane"></param>
     public void SpawnNote(Lane lane)
     {
         if (pooledNotes.Count > 0)
@@ -131,29 +148,7 @@ public class NotePooler : MonoBehaviour
             note.NotePlaced();
             pooledNotes.Remove(note);
             lane.activeNotes.Add(note);
-            // if (PlayerManager.multiplayer)
-            // {
-            //     if (pooledNotes.Count <= 0)
-            //     {
-            //         goto NoteSpawn;
-            //     }
-            //
-            //     NoteEnemy notep2 = pooledNotes[0];
-            //     if (notep2.transform.position != lane.gameObject.transform.position)
-            //         notep2.transform.position = lane.gameObject.transform.position;
-            //     notep2.transform.parent = lane.transform;
-            //     notep2.gameObject.layer = LayerMask.NameToLayer("p2");
-            //     foreach (var trans in notep2.GetComponentsInChildren<Transform>())
-            //     {
-            //         trans.gameObject.layer = LayerMask.NameToLayer("p2");
-            //     }
-            //
-            //     notep2.canMove = true;
-            //     notep2.gameObject.SetActive(true);
-            //     notep2.NotePlaced();
-            //     pooledNotes.Remove(notep2);
-            //     lane.activeNotes2.Add(notep2);
-            // }
+
             if (PlayerManager.multiplayer)
                 NoteP2Spawn(lane);
             return;
@@ -163,19 +158,13 @@ public class NotePooler : MonoBehaviour
         lane.activeNotes.Add(spawnedNote.GetComponent<NoteEnemy>());
         if (PlayerManager.multiplayer)
             NoteP2Spawn(lane);
-
-        //     if (!PlayerManager.multiplayer) return;
-        // NoteSpawn:
-        //     GameObject p2Note = Instantiate(noteEnemy, lane.gameObject.transform);
-        //     p2Note.layer = LayerMask.NameToLayer("p2");
-        //     foreach (var trans in p2Note.GetComponentsInChildren<Transform>())
-        //     {
-        //         trans.gameObject.layer = LayerMask.NameToLayer("p2");
-        //     }
-        //
-        //     lane.activeNotes2.Add(p2Note.GetComponent<NoteEnemy>());
     }
 
+    /// <summary>
+    /// Spawns a new noteobject for player 2, if the game is in multiplayer mode.
+    /// The noteobject spawns in sync with the note that spawns for player 1, and spawns in the same lane as well.
+    /// </summary>
+    /// <param name="lane"></param>
     void NoteP2Spawn(Lane lane)
     {
         GameObject p2Note = Instantiate(noteEnemy, lane.gameObject.transform);
@@ -188,6 +177,11 @@ public class NotePooler : MonoBehaviour
         lane.activeNotes2.Add(p2Note.GetComponent<NoteEnemy>());
     }
 
+    /// <summary>
+    /// Disables a noteobject and adds it to the pool of objects that can be reinstantiated.
+    /// Object will be destroyed instead of being pooled if the list is at the max capacity.
+    /// </summary>
+    /// <param name="noteObj"></param>
     public void PoolObject(NoteEnemy noteObj)
     {
         Lane parentLane = noteObj.transform.parent.GetComponent<Lane>();
