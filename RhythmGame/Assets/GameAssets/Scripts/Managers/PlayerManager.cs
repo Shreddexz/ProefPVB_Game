@@ -31,6 +31,7 @@ public class PlayerManager : MonoBehaviour
     void Awake()
     {
         playersReady = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
@@ -72,6 +73,8 @@ public class PlayerManager : MonoBehaviour
     {
         if (scene.name == "Gameplay")
         {
+            if (Cursor.lockState != CursorLockMode.Locked)
+                Cursor.lockState = CursorLockMode.Locked;
             StartCoroutine(LoadWait());
         }
     }
